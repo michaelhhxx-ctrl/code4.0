@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q-Edu 教师数据看板</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
+      background: #050a1e;
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 28px 36px 48px;
+    }
+
+    /* ── Header ── */
+    .dash-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(99,179,237,.18);
+    }
+    .dash-brand { display: flex; align-items: center; gap: 14px; }
+    .dash-logo {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, #3182ce, #63b3ed);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 900; color: #fff;
+      box-shadow: 0 0 18px rgba(99,179,237,.4);
+    }
+    .dash-title-wrap { }
+    .dash-title { font-size: 22px; font-weight: 700; color: #e2e8f0; letter-spacing: .3px; }
+    .dash-subtitle { font-size: 12px; color: rgba(226,232,240,.45); margin-top: 2px; }
+    .dash-meta { text-align: right; }
+    .dash-time { font-size: 11px; color: rgba(226,232,240,.4); margin-bottom: 6px; }
+    .dash-refresh {
+      padding: 6px 16px; background: rgba(49,130,206,.2);
+      border: 1px solid rgba(99,179,237,.35); border-radius: 7px;
+      font-size: 12px; color: #63b3ed; cursor: pointer; transition: .2s;
+    }
+    .dash-refresh:hover { background: rgba(49,130,206,.35); }
+
+    /* ── Metric Cards ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 900px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+    .card {
+      background: rgba(12,24,64,.85);
+      border: 1px solid rgba(99,179,237,.18);
+      border-radius: 14px;
+      padding: 20px 22px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .2s;
+    }
+    .card:hover { border-color: rgba(99,179,237,.4); }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--card-accent, linear-gradient(90deg, #3182ce, #63b3ed));
+    }
+    .card-icon { font-size: 22px; margin-bottom: 10px; }
+    .card-label { font-size: 11px; color: rgba(226,232,240,.5); letter-spacing: .5px; margin-bottom: 6px; }
+    .card-value { font-size: 34px; font-weight: 700; color: #e2e8f0; line-height: 1; }
+    .card-unit  { font-size: 14px; color: rgba(226,232,240,.5); margin-left: 3px; }
+    .card-note  { font-size: 10px; color: rgba(226,232,240,.35); margin-top: 6px; }
+    .card-green  { --card-accent: linear-gradient(90deg, #38a169, #68d391); }
+    .card-yellow { --card-accent: linear-gradient(90deg, #d69e2e, #f6e05e); }
+    .card-purple { --card-accent: linear-gradient(90deg, #805ad5, #b794f4); }
+    .card-teal   { --card-accent: linear-gradient(90deg, #2c7a7b, #81e6d9); }
+
+    /* ── Two-column row ── */
+    .row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 800px) { .row2 { grid-template-columns: 1fr; } }
+
+    /* ── Panel ── */
+    .panel {
+      background: rgba(12,24,64,.85);
+      border: 1px solid rgba(99,179,237,.15);
+      border-radius: 14px;
+      padding: 20px 22px;
+    }
+    .panel-title {
+      font-size: 13px; font-weight: 700; color: #63b3ed;
+      letter-spacing: .5px; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 7px;
+    }
+
+    /* ── Score Comparison ── */
+    .score-cmp { display: flex; align-items: center; gap: 0; }
+    .score-box {
+      flex: 1; text-align: center; padding: 14px 0;
+      border-radius: 10px;
+    }
+    .score-box.pre  { background: rgba(49,130,206,.12); border: 1px solid rgba(99,179,237,.2); }
+    .score-box.post { background: rgba(56,161,105,.12); border: 1px solid rgba(104,211,145,.2); }
+    .score-box-label { font-size: 10px; color: rgba(226,232,240,.5); margin-bottom: 5px; }
+    .score-box-num   { font-size: 36px; font-weight: 700; }
+    .score-box.pre  .score-box-num { color: #63b3ed; }
+    .score-box.post .score-box-num { color: #68d391; }
+    .score-box-denom { font-size: 14px; color: rgba(226,232,240,.4); }
+    .score-arrow {
+      padding: 0 16px; font-size: 22px;
+      color: rgba(226,232,240,.25);
+    }
+    .score-gain {
+      text-align: center; margin-top: 14px; padding: 8px;
+      background: rgba(246,224,94,.08); border: 1px solid rgba(246,224,94,.2);
+      border-radius: 8px;
+    }
+    .score-gain-num  { font-size: 20px; font-weight: 700; color: #f6e05e; }
+    .score-gain-label{ font-size: 11px; color: rgba(246,224,94,.6); margin-top: 2px; }
+
+    /* ── Progress bars (experiment completion) ── */
+    .exp-list { display: flex; flex-direction: column; gap: 14px; }
+    .exp-item { }
+    .exp-item-head {
+      display: flex; justify-content: space-between;
+      font-size: 12px; margin-bottom: 6px;
+    }
+    .exp-item-name { color: rgba(226,232,240,.8); font-weight: 600; }
+    .exp-item-pct  { color: #63b3ed; font-weight: 700; }
+    .exp-bar-bg {
+      height: 8px; background: rgba(99,179,237,.1);
+      border-radius: 4px; overflow: hidden;
+    }
+    .exp-bar-fill {
+      height: 100%; border-radius: 4px;
+      background: linear-gradient(90deg, #3182ce, #63b3ed);
+      transition: width .8s cubic-bezier(.4,0,.2,1);
+    }
+    .exp-bar-fill.done { background: linear-gradient(90deg, #38a169, #68d391); }
+    .exp-status {
+      font-size: 10px; margin-top: 4px;
+      color: rgba(226,232,240,.35);
+    }
+
+    /* ── Event log ── */
+    .log-list { display: flex; flex-direction: column; gap: 8px; max-height: 260px; overflow-y: auto; }
+    .log-list::-webkit-scrollbar { width: 4px; }
+    .log-list::-webkit-scrollbar-track { background: transparent; }
+    .log-list::-webkit-scrollbar-thumb { background: rgba(99,179,237,.2); border-radius: 2px; }
+    .log-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 8px 10px;
+      background: rgba(255,255,255,.03);
+      border-radius: 8px; border-left: 2px solid var(--log-color, rgba(99,179,237,.3));
+    }
+    .log-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .log-body { flex: 1; min-width: 0; }
+    .log-text { font-size: 12px; color: rgba(226,232,240,.8); }
+    .log-time { font-size: 10px; color: rgba(226,232,240,.3); margin-top: 2px; }
+    .log-empty { font-size: 12px; color: rgba(226,232,240,.3); text-align: center; padding: 24px 0; }
+
+    /* ── No-data state ── */
+    .no-data {
+      text-align: center; padding: 60px 24px;
+      color: rgba(226,232,240,.3); font-size: 14px; line-height: 1.8;
+    }
+    .no-data-icon { font-size: 48px; margin-bottom: 12px; opacity: .5; }
+
+    /* ── Footer ── */
+    .dash-footer {
+      margin-top: 32px; text-align: center;
+      font-size: 11px; color: rgba(226,232,240,.2);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<div class="dash-header">
+  <div class="dash-brand">
+    <div class="dash-logo">Q</div>
+    <div class="dash-title-wrap">
+      <div class="dash-title">Q-Edu 教师数据看板</div>
+      <div class="dash-subtitle">《人工智能通识》·《大学计算机基础》· 量子计算虚拟仿真实验</div>
+    </div>
+  </div>
+  <div class="dash-meta">
+    <div class="dash-time" id="dash-time">—</div>
+    <button class="dash-refresh" onclick="loadData()">↻ 刷新数据</button>
+  </div>
+</div>
+
+<!-- ── 主体（由 JS 动态渲染）── -->
+<div id="dash-body"></div>
+
+<div class="dash-footer">Q-Edu · 数据来源：本机 localStorage · 仅供教学展示使用</div>
+
+<script>
+// ─── 事件类型映射 ────────────────────────────────────────────────
+const LOG_META = {
+  enter_course: { icon: '🚀', color: 'rgba(99,179,237,.5)',  text: '进入课程模式' },
+  pretest_done: { icon: '📋', color: 'rgba(246,224,94,.5)',  text: (d) => `完成前测，得分 ${d.score} / 5` },
+  posttest_done:{ icon: '🎓', color: 'rgba(104,211,145,.5)', text: (d) => `完成后测，得分 ${d.score} / 5` },
+  start_exp:    { icon: '⚗️', color: 'rgba(99,179,237,.3)',  text: (d) => `开始实验 ${d.exp}` },
+  exp_done:     { icon: '✅', color: 'rgba(104,211,145,.4)', text: (d) => `完成实验 ${d.exp}${typeof d.duration === 'number' ? '，用时 ' + fmtDuration(d.duration) : ''}` },
+};
+
+function fmtDuration(secs) {
+  if (!secs || secs < 0) return '—';
+  if (secs < 60) return secs + ' 秒';
+  const m = Math.floor(secs / 60), s = secs % 60;
+  return m + ' 分' + (s > 0 ? s + ' 秒' : '');
+}
+
+function fmtTime(ts) {
+  const d = new Date(ts);
+  const pad = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+}
+
+function fmtAgo(ts) {
+  const diff = Date.now() - ts;
+  if (diff < 60000)   return Math.round(diff/1000) + ' 秒前';
+  if (diff < 3600000) return Math.round(diff/60000) + ' 分钟前';
+  if (diff < 86400000)return Math.round(diff/3600000) + ' 小时前';
+  return Math.round(diff/86400000) + ' 天前';
+}
+
+// ─── 读取并聚合数据 ──────────────────────────────────────────────
+function readStats() {
+  let log = [];
+  try { log = JSON.parse(localStorage.getItem('qedu_course_log') || '[]'); } catch(e) {}
+
+  const preScore  = localStorage.getItem('qedu_pretest_score');
+  const postScore = localStorage.getItem('qedu_posttest_score');
+
+  let cstate = {};
+  try { cstate = JSON.parse(localStorage.getItem('qedu_cstate') || '{}'); } catch(e) {}
+
+  // 从 log 中提取各类事件
+  const pretestEvents  = log.filter(e => e.type === 'pretest_done');
+  const posttestEvents = log.filter(e => e.type === 'posttest_done');
+  const enterEvents    = log.filter(e => e.type === 'enter_course');
+  const expDoneEvents  = log.filter(e => e.type === 'exp_done');
+
+  // 参与人次（以 enter_course 计；同一人多次进入均计入）
+  const sessions = Math.max(enterEvents.length, preScore != null ? 1 : 0);
+
+  // 得分样本（优先取 log 中所有记录，以支持多次测评取平均）
+  const preScores  = pretestEvents.length  > 0
+    ? pretestEvents.map(e => e.data.score)
+    : (preScore  != null ? [parseInt(preScore)]  : []);
+  const postScores = posttestEvents.length > 0
+    ? posttestEvents.map(e => e.data.score)
+    : (postScore != null ? [parseInt(postScore)] : []);
+
+  const avgPre  = preScores.length  > 0 ? (preScores.reduce((a,b)=>a+b,0)  / preScores.length)  : null;
+  const avgPost = postScores.length > 0 ? (postScores.reduce((a,b)=>a+b,0) / postScores.length) : null;
+  const avgGain = (avgPre != null && avgPost != null) ? (avgPost - avgPre) : null;
+
+  // 实验完成率（expDone 事件数 / sessions，上限 100%）
+  const expDone = [1,2,3].map(n => {
+    const cnt = expDoneEvents.filter(e => e.data.exp === n).length;
+    return sessions > 0 ? Math.min(cnt / sessions, 1) : (cstate['exp'+n+'Done'] ? 1 : 0);
+  });
+
+  // 各实验平均用时（从带 duration 字段的 exp_done 事件中提取）
+  const expAvgDuration = [1,2,3].map(n => {
+    const evts = expDoneEvents.filter(e => e.data.exp === n && typeof e.data.duration === 'number' && e.data.duration > 0);
+    if (evts.length === 0) {
+      // 降级：从 cstate 读单条记录
+      const d = cstate['exp'+n+'Duration'];
+      return (typeof d === 'number' && d > 0) ? d : null;
+    }
+    return Math.round(evts.reduce((a, e) => a + e.data.duration, 0) / evts.length);
+  });
+
+  // 最近 15 条事件（倒序）
+  const recent = [...log].reverse().slice(0, 15);
+
+  return { sessions, preScores, postScores, avgPre, avgPost, avgGain, expDone, expAvgDuration, recent, log, cstate };
+}
+
+// ─── 渲染 ────────────────────────────────────────────────────────
+function loadData() {
+  document.getElementById('dash-time').textContent = '更新于 ' + new Date().toLocaleString('zh-CN');
+
+  const st = readStats();
+  const body = document.getElementById('dash-body');
+
+  // 无任何数据
+  if (st.sessions === 0 && st.log.length === 0) {
+    body.innerHTML = `
+      <div class="no-data">
+        <div class="no-data-icon">📊</div>
+        <div>暂无学生数据</div>
+        <div style="font-size:12px;margin-top:8px;">学生进入课程模式后，数据将在此处显示</div>
+      </div>`;
+    return;
+  }
+
+  // ── 指标卡 ──
+  const fmt1 = v => v != null ? v.toFixed(1) : '—';
+  const gainSign = st.avgGain != null ? (st.avgGain >= 0 ? '+' : '') : '';
+
+  const cards = `
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">👥</div>
+        <div class="card-label">参与人次</div>
+        <div class="card-value">${st.sessions || 1}<span class="card-unit">次</span></div>
+        <div class="card-note">已完成测评：${Math.max(st.preScores.length, st.postScores.length > 0 ? 1 : 0)} 人</div>
+      </div>
+      <div class="card card-yellow">
+        <div class="card-icon">📋</div>
+        <div class="card-label">前测平均分</div>
+        <div class="card-value">${fmt1(st.avgPre)}<span class="card-unit">/ 5</span></div>
+        <div class="card-note">${st.preScores.length > 0 ? '样本 ' + st.preScores.length + ' 人' : '暂无数据'}</div>
+      </div>
+      <div class="card card-green">
+        <div class="card-icon">🎓</div>
+        <div class="card-label">后测平均分</div>
+        <div class="card-value">${fmt1(st.avgPost)}<span class="card-unit">/ 5</span></div>
+        <div class="card-note">${st.postScores.length > 0 ? '样本 ' + st.postScores.length + ' 人' : '暂无数据'}</div>
+      </div>
+      <div class="card card-purple">
+        <div class="card-icon">📈</div>
+        <div class="card-label">平均学习提升</div>
+        <div class="card-value">${st.avgGain != null ? gainSign + fmt1(st.avgGain) : '—'}<span class="card-unit">题</span></div>
+        <div class="card-note">${st.avgGain != null ? (st.avgGain >= 0 ? '正向增益' : '需要关注') : '需完成前后测'}</div>
+      </div>
+    </div>`;
+
+  // ── 得分对比 ──
+  const preDisp  = st.avgPre  != null ? fmt1(st.avgPre)  : '—';
+  const postDisp = st.avgPost != null ? fmt1(st.avgPost) : '—';
+  const gainDisp = st.avgGain != null ? gainSign + fmt1(st.avgGain) + ' 题' : '—';
+
+  const scoreCmp = `
+    <div class="panel">
+      <div class="panel-title">📊 前后测得分对比</div>
+      <div class="score-cmp">
+        <div class="score-box pre">
+          <div class="score-box-label">前测均分</div>
+          <div class="score-box-num">${preDisp}<span class="score-box-denom"> /5</span></div>
+        </div>
+        <div class="score-arrow">→</div>
+        <div class="score-box post">
+          <div class="score-box-label">后测均分</div>
+          <div class="score-box-num">${postDisp}<span class="score-box-denom"> /5</span></div>
+        </div>
+      </div>
+      ${st.avgGain != null ? `
+        <div class="score-gain">
+          <div class="score-gain-num">${gainDisp}</div>
+          <div class="score-gain-label">平均提升幅度</div>
+        </div>` : `
+        <div style="font-size:11px;color:rgba(226,232,240,.3);text-align:center;margin-top:12px;">
+          学生完成前后测后将显示提升数据
+        </div>`}
+    </div>`;
+
+  // ── 实验完成率 ──
+  const expNames  = ['实验一：量子叠加态', '实验二：Bell 态纠缠', '实验三：Grover 搜索'];
+  const expEmoji  = ['⚛️', '🔗', '🔍'];
+
+  const expBars = st.expDone.map((pct, i) => {
+    const pctInt = Math.round(pct * 100);
+    const isDone = pct >= 1;
+    const dur    = st.expAvgDuration[i];
+    const durStr = dur != null ? ' · 平均用时 ' + fmtDuration(dur) : '';
+    return `
+      <div class="exp-item">
+        <div class="exp-item-head">
+          <span class="exp-item-name">${expEmoji[i]} ${expNames[i]}</span>
+          <span class="exp-item-pct">${pctInt}%</span>
+        </div>
+        <div class="exp-bar-bg">
+          <div class="exp-bar-fill ${isDone ? 'done' : ''}" style="width:${pctInt}%"></div>
+        </div>
+        <div class="exp-status">${isDone ? '✅ 已完成' : (pct > 0 ? '进行中…' : '未开始')}${durStr}</div>
+      </div>`;
+  }).join('');
+
+  const expPanel = `
+    <div class="panel">
+      <div class="panel-title">🧪 引导实验完成情况</div>
+      <div class="exp-list">${expBars}</div>
+    </div>`;
+
+  // ── 事件日志 ──
+  let logItems = '';
+  if (st.recent.length === 0) {
+    logItems = '<div class="log-empty">暂无学习记录</div>';
+  } else {
+    logItems = st.recent.map(ev => {
+      const meta = LOG_META[ev.type] || { icon: '•', color: 'rgba(226,232,240,.2)', text: ev.type };
+      const textStr = typeof meta.text === 'function' ? meta.text(ev.data || {}) : meta.text;
+      return `
+        <div class="log-item" style="--log-color:${meta.color}">
+          <div class="log-icon">${meta.icon}</div>
+          <div class="log-body">
+            <div class="log-text">${textStr}</div>
+            <div class="log-time">${fmtTime(ev.ts)} &nbsp;·&nbsp; ${fmtAgo(ev.ts)}</div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  const logPanel = `
+    <div class="panel">
+      <div class="panel-title">📝 最近学习事件<span style="font-size:10px;font-weight:400;color:rgba(226,232,240,.35);margin-left:8px;">最新 ${st.recent.length} 条</span></div>
+      <div class="log-list">${logItems}</div>
+    </div>`;
+
+  body.innerHTML = cards + `<div class="row2">${scoreCmp}${expPanel}</div>` + logPanel;
+}
+
+// 页面加载时自动渲染
+loadData();
+</script>
+</body>
+</html>
