@@ -1,0 +1,771 @@
+/* ══ CLASSIC THEME — Precision Optics / Quantum Lab ══
+   html:not([data-theme]) scope · 纯 CSS，不改 HTML/JS
+═══════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────
+   §1  DESIGN TOKENS
+───────────────────────────────────────────────────── */
+:root:not([data-theme]) {
+  --accent:       #3b5bdb;
+  --accent-mid:   #748ffc;
+  --accent-lt:    #eef2ff;
+  --accent-dk:    #2845b5;
+  --accent-glow:  rgba(59,91,219,0.18);
+
+  /* 不再用原版的中性灰，全部换成有温度的蓝紫冷调 */
+  --bg-canvas:    #e9eef9;
+  --bg-primary:   #e8ecf8;
+  --bg-surface:   #f5f7ff;
+  --bg-elevated:  #f0f3fc;
+  --bg-panel-tb:  linear-gradient(170deg,#eaedfc 0%,#ece8fb 100%);
+  --bg-panel-sp:  linear-gradient(170deg,#ece8fb 0%,#eaedfc 100%);
+  --bg-canvas-ci: #f0f5ff;
+
+  --border-subtle: rgba(59,91,219,0.10);
+  --border-medium: rgba(59,91,219,0.18);
+  --border-strong: rgba(59,91,219,0.32);
+
+  --shadow-xs: 0 1px 3px rgba(59,91,219,0.08);
+  --shadow-sm: 0 2px 8px rgba(59,91,219,0.10), 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 16px rgba(59,91,219,0.12), 0 2px 6px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 32px rgba(59,91,219,0.15), 0 4px 8px rgba(0,0,0,0.07);
+
+  --radius-xs: 4px;
+  --radius-sm: 7px;
+  --radius-md: 11px;
+  --radius-lg: 16px;
+
+  --font-ui: 'Plus Jakarta Sans','Inter',system-ui,sans-serif;
+  --ease-out: cubic-bezier(0.22,1,0.36,1);
+  --ease-spring: cubic-bezier(0.34,1.56,0.64,1);
+
+  /* 门分类色 */
+  --c-single-a:#0ea5e9; --c-single-b:#38bdf8;
+  --c-single-bg:#dbeafe; --c-single-bd:rgba(14,165,233,0.40);
+  --c-single-sym:#0369a1;
+
+  --c-rot-a:#7c3aed; --c-rot-b:#a855f7;
+  --c-rot-bg:#ede9fe; --c-rot-bd:rgba(124,58,237,0.38);
+  --c-rot-sym:#5b21b6;
+
+  --c-two-a:#1d4ed8; --c-two-b:#60a5fa;
+  --c-two-bg:#dbeafe; --c-two-bd:rgba(59,130,246,0.40);
+  --c-two-sym:#1e40af;
+
+  --c-meas-a:#b45309; --c-meas-b:#f59e0b;
+  --c-meas-bg:#fef3c7; --c-meas-bd:rgba(245,158,11,0.42);
+  --c-meas-sym:#78350f;
+
+  /* 覆盖全局变量 */
+  --bg:   var(--bg-canvas);
+  --white:var(--bg-surface);
+  --surf: var(--bg-elevated);
+  --surface:var(--bg-elevated);
+  --b1: rgba(59,91,219,0.15);
+  --b2: rgba(59,91,219,0.22);
+  --t9:#0f172a; --t7:#334155; --t5:#64748b; --t3:#94a3b8;
+  --sans:var(--font-ui);
+}
+
+/* ─────────────────────────────────────────────────────
+   §2  BODY — 渐变背景 + 环境光（放在 body 自身）
+───────────────────────────────────────────────────── */
+html:not([data-theme]) body {
+  background:
+    radial-gradient(ellipse 80% 50% at 10% 15%, rgba(59,91,219,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 55% at 88% 80%, rgba(124,58,237,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 55% 5%,  rgba(14,165,233,0.06) 0%, transparent 50%),
+    linear-gradient(150deg, #e8eeff 0%, #eff2fc 45%, #e8f3f8 100%);
+  font-family: var(--font-ui);
+  position: relative;
+}
+
+/* 网格扫描线 — 整页极淡的量子网格感 */
+html:not([data-theme]) body::before {
+  content:'';
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(59,91,219,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,91,219,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: grid-breathe 8s ease-in-out infinite alternate;
+}
+@keyframes grid-breathe {
+  from { opacity:0.4; }
+  to   { opacity:1;   }
+}
+
+/* header 必须高于面板，保证其下拉菜单/弹窗层叠正确 */
+html:not([data-theme]) header { position:relative; z-index:50; }
+
+/* 主内容区在 header 之下 */
+html:not([data-theme]) #cv,
+html:not([data-theme]) #vv,
+html:not([data-theme]) #qv { position:relative; z-index:1; }
+
+html:not([data-theme]) #sb  { position:relative; z-index:2; }
+
+/* ─────────────────────────────────────────────────────
+   §3  HEADER — 深色精密仪表顶栏
+───────────────────────────────────────────────────── */
+html:not([data-theme]) header {
+  background: linear-gradient(90deg,#1a2436 0%,#1e2a3a 60%,#1a2d38 100%);
+  border-bottom: none;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.28), 0 1px 0 rgba(255,255,255,0.04);
+}
+
+/* LED 光缝 */
+html:not([data-theme]) header::after {
+  content:'';
+  position:absolute; bottom:0; left:0; right:0; height:2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(59,91,219,0.5) 15%,
+    rgba(116,143,252,0.9) 35%,
+    rgba(34,211,238,0.7) 60%,
+    rgba(59,91,219,0.4) 82%,
+    transparent 100%);
+  animation: header-led 4s ease-in-out infinite alternate;
+}
+@keyframes header-led {
+  from { opacity:0.7; }
+  to   { opacity:1;   }
+}
+
+html:not([data-theme]) .logo { font-family:var(--font-ui); font-weight:700; }
+html:not([data-theme]) .logo-ring {
+  border-color:rgba(116,143,252,0.6);
+  background:rgba(59,91,219,0.22);
+}
+html:not([data-theme]) .ntab {
+  font-family:var(--font-ui); font-size:.9em; font-weight:500;
+  transition: all .18s;
+}
+html:not([data-theme]) .ntab.on {
+  background:rgba(116,143,252,0.22);
+  box-shadow:inset 0 -2px 0 var(--accent-mid);
+  color:#fff;
+}
+html:not([data-theme]) .hbtn { font-family:var(--font-ui); font-weight:600; }
+html:not([data-theme]) .hdot {
+  background:#4ade80;
+  box-shadow:0 0 0 2px rgba(74,222,128,0.25), 0 0 8px rgba(74,222,128,0.5);
+  animation: dot-pulse 3s ease-in-out infinite;
+}
+@keyframes dot-pulse {
+  0%,100% { box-shadow:0 0 0 2px rgba(74,222,128,0.20),0 0 6px rgba(74,222,128,0.4); }
+  50%     { box-shadow:0 0 0 4px rgba(74,222,128,0.10),0 0 12px rgba(74,222,128,0.6); }
+}
+
+/* ─────────────────────────────────────────────────────
+   §4  SIDEBAR #tb — 渐变面板 + 呼吸边缘
+───────────────────────────────────────────────────── */
+html:not([data-theme]) #tb {
+  background: var(--bg-panel-tb);
+  border-right: 1px solid var(--border-subtle);
+  box-shadow: 2px 0 16px rgba(59,91,219,0.08);
+  position: relative;
+  animation: panel-breathe-l 5s ease-in-out infinite;
+}
+@keyframes panel-breathe-l {
+  0%,100% { box-shadow:2px 0 12px rgba(59,91,219,0.06); }
+  50%     { box-shadow:2px 0 24px rgba(59,91,219,0.14); }
+}
+
+/* 右边缘渐变光线 */
+html:not([data-theme]) #tb::after {
+  content:'';
+  position:absolute; top:8%; bottom:8%; right:-1px; width:2px;
+  background:linear-gradient(180deg,
+    transparent, rgba(59,91,219,0.20) 30%,
+    rgba(116,143,252,0.35) 50%,
+    rgba(59,91,219,0.20) 70%, transparent);
+  pointer-events:none; z-index:3;
+}
+
+html:not([data-theme]) .ph {
+  background:transparent;
+  border-bottom:1px solid var(--border-subtle);
+  color:var(--t5); letter-spacing:1.4px; font-size:10.5px;
+}
+html:not([data-theme]) .gcat {
+  color:var(--t5); letter-spacing:1.6px; font-size:10px; padding-top:12px;
+}
+
+/* ─────────────────────────────────────────────────────
+   §5  GATE CARDS — 强色标 + 棱边高光 + hover 光晕
+───────────────────────────────────────────────────── */
+html:not([data-theme]) .gi {
+  position:relative; overflow:hidden;
+  border-radius:var(--radius-sm);
+  border:1.5px solid transparent;
+  background:var(--bg-surface);
+  box-shadow:var(--shadow-xs), inset 0 1px 0 rgba(255,255,255,0.9);
+  transition: transform .16s var(--ease-out), box-shadow .16s, border-color .16s;
+  font-family:var(--font-ui);
+}
+
+/* 左侧色标条 */
+html:not([data-theme]) .gi::before {
+  content:'';
+  position:absolute; left:0; top:0; bottom:0; width:4px;
+  background:linear-gradient(180deg, var(--stripe-a,var(--accent)), var(--stripe-b,var(--accent-mid)));
+  border-radius:7px 0 0 7px;
+}
+
+/* 顶部棱边高光 */
+html:not([data-theme]) .gi::after {
+  content:'';
+  position:absolute; top:0; left:12%; right:12%; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+  pointer-events:none;
+}
+
+html:not([data-theme]) .gi:hover {
+  transform:translateY(-3px) scale(1.02);
+  box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+html:not([data-theme]) .gi:active {
+  transform:scale(.93);
+  box-shadow:var(--shadow-xs);
+  transition-duration:.08s;
+}
+
+/* 单比特 */
+html:not([data-theme]) .gs.gi, html:not([data-theme]) .gi.gs {
+  --stripe-a:var(--c-single-a); --stripe-b:var(--c-single-b);
+  border-color:var(--c-single-bd);
+  background:linear-gradient(160deg,var(--c-single-bg),#eff8ff);
+}
+html:not([data-theme]) .gs.gi:hover, html:not([data-theme]) .gi.gs:hover {
+  box-shadow:0 6px 20px rgba(14,165,233,.16),0 0 0 1px rgba(14,165,233,.22),inset 0 1px 0 rgba(255,255,255,.9);
+}
+html:not([data-theme]) .gs.gi .gsym, html:not([data-theme]) .gi.gs .gsym { color:var(--c-single-sym); font-weight:700; }
+html:not([data-theme]) .gs.gi .glbl, html:not([data-theme]) .gi.gs .glbl { color:var(--c-single-a); }
+
+/* 旋转门 */
+html:not([data-theme]) .gr.gi, html:not([data-theme]) .gi.gr {
+  --stripe-a:var(--c-rot-a); --stripe-b:var(--c-rot-b);
+  border-color:var(--c-rot-bd);
+  background:linear-gradient(160deg,var(--c-rot-bg),#f5f0ff);
+}
+html:not([data-theme]) .gr.gi:hover, html:not([data-theme]) .gi.gr:hover {
+  box-shadow:0 6px 20px rgba(124,58,237,.16),0 0 0 1px rgba(124,58,237,.22),inset 0 1px 0 rgba(255,255,255,.9);
+}
+html:not([data-theme]) .gr.gi .gsym, html:not([data-theme]) .gi.gr .gsym { color:var(--c-rot-sym); font-weight:700; }
+html:not([data-theme]) .gr.gi .glbl, html:not([data-theme]) .gi.gr .glbl { color:var(--c-rot-a); }
+
+/* 双比特 */
+html:not([data-theme]) .gt.gi, html:not([data-theme]) .gi.gt {
+  --stripe-a:var(--c-two-a); --stripe-b:var(--c-two-b);
+  border-color:var(--c-two-bd);
+  background:linear-gradient(160deg,var(--c-two-bg),#e8f0ff);
+}
+html:not([data-theme]) .gt.gi:hover, html:not([data-theme]) .gi.gt:hover {
+  box-shadow:0 6px 20px rgba(59,91,219,.16),0 0 0 1px rgba(59,91,219,.22),inset 0 1px 0 rgba(255,255,255,.9);
+}
+html:not([data-theme]) .gt.gi .gsym, html:not([data-theme]) .gi.gt .gsym { color:var(--c-two-sym); font-weight:700; }
+html:not([data-theme]) .gt.gi .glbl, html:not([data-theme]) .gi.gt .glbl { color:var(--c-two-a); }
+
+/* 测量门 */
+html:not([data-theme]) .gm.gi, html:not([data-theme]) .gi.gm {
+  --stripe-a:var(--c-meas-a); --stripe-b:var(--c-meas-b);
+  border-color:var(--c-meas-bd);
+  background:linear-gradient(160deg,var(--c-meas-bg),#fff8e7);
+}
+html:not([data-theme]) .gm.gi:hover, html:not([data-theme]) .gi.gm:hover {
+  box-shadow:0 6px 20px rgba(245,158,11,.16),0 0 0 1px rgba(245,158,11,.24),inset 0 1px 0 rgba(255,255,255,.9);
+}
+html:not([data-theme]) .gm.gi .gsym, html:not([data-theme]) .gi.gm .gsym { color:var(--c-meas-sym); font-weight:700; }
+html:not([data-theme]) .gm.gi .glbl, html:not([data-theme]) .gi.gm .glbl { color:var(--c-meas-a); }
+
+/* 预置线路 */
+html:not([data-theme]) .pbtn {
+  position:relative; padding-left:16px;
+  border-radius:var(--radius-sm);
+  border:1px solid var(--border-subtle);
+  background:var(--bg-surface);
+  color:var(--t7);
+  box-shadow:var(--shadow-xs);
+  transition:all .16s;
+}
+html:not([data-theme]) .pbtn::before {
+  content:'';
+  position:absolute; left:0; top:20%; bottom:20%;
+  width:3px; border-radius:2px;
+  background:transparent;
+  transition:all .2s var(--ease-out);
+}
+html:not([data-theme]) .pbtn:hover {
+  border-color:var(--border-medium);
+  color:var(--accent); background:var(--accent-lt);
+  transform:translateX(2px);
+  box-shadow:var(--shadow-sm);
+}
+html:not([data-theme]) .pbtn:hover::before {
+  background:linear-gradient(180deg,var(--accent),var(--accent-mid));
+  top:12%; bottom:12%;
+  box-shadow:0 0 6px rgba(59,91,219,0.3);
+}
+
+/* ─────────────────────────────────────────────────────
+   §6  CIRCUIT CANVAS — 量子线路图纸
+───────────────────────────────────────────────────── */
+html:not([data-theme]) #cc {
+  background: var(--bg-canvas-ci);
+}
+
+/* 多层精密网格：细格 + 粗格 + 交叉亮点 */
+html:not([data-theme]) .ci {
+  background-color: var(--bg-canvas-ci);
+  background-image:
+    linear-gradient(rgba(59,91,219,0.07) 1px,  transparent 1px),
+    linear-gradient(90deg, rgba(59,91,219,0.07) 1px, transparent 1px),
+    linear-gradient(rgba(59,91,219,0.14) 1px,  transparent 1px),
+    linear-gradient(90deg, rgba(59,91,219,0.14) 1px, transparent 1px),
+    radial-gradient(circle 1.5px, rgba(59,91,219,0.14) 1.5px, transparent 1.5px);
+  background-size:
+    24px 24px,
+    24px 24px,
+    96px 96px,
+    96px 96px,
+    24px 24px;
+  background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
+  animation: canvas-breathe 7s ease-in-out infinite alternate;
+}
+@keyframes canvas-breathe {
+  from { background-color:#eef3ff; }
+  to   { background-color:#f2f6ff; }
+}
+
+/* 量子线 */
+html:not([data-theme]) .wl {
+  background: linear-gradient(90deg,
+    rgba(59,91,219,0.15) 0%,
+    rgba(59,91,219,0.35) 30%,
+    rgba(59,91,219,0.35) 70%,
+    rgba(59,91,219,0.15) 100%);
+  height:1.5px !important;
+}
+
+/* 放置槽 */
+html:not([data-theme]) .ds {
+  border-radius:var(--radius-sm);
+  border:1px solid rgba(59,91,219,0.20);
+  background:rgba(240,245,255,0.70);
+  transition:all .14s;
+}
+html:not([data-theme]) .ds.dov {
+  border:2px solid var(--accent);
+  background:var(--accent-lt);
+  box-shadow:0 0 0 4px rgba(59,91,219,0.12),inset 0 0 12px rgba(59,91,219,0.06);
+}
+html:not([data-theme]) .ds.occ {
+  border-style:solid;
+  border-color:var(--border-medium);
+  background:rgba(255,255,255,0.9);
+}
+
+/* 已放置门 */
+html:not([data-theme]) .gb {
+  border-radius:var(--radius-sm);
+  box-shadow:var(--shadow-sm);
+  font-family:var(--font-ui); font-weight:700;
+  animation:gate-breathe 4s ease-in-out infinite;
+}
+@keyframes gate-breathe {
+  0%,100% { box-shadow:var(--shadow-sm); }
+  50%     { box-shadow:var(--shadow-sm), 0 0 10px rgba(59,91,219,0.10); }
+}
+
+html:not([data-theme]) .gb.executing {
+  animation:gate-execute 600ms ease-out both;
+  z-index:20;
+}
+@keyframes gate-execute {
+  0%   { box-shadow:0 0 0 0   rgba(59,91,219,.45); transform:scale(1);    }
+  40%  {                                            transform:scale(1.08); }
+  100% { box-shadow:0 0 0 16px rgba(59,91,219,0);  transform:scale(1);    }
+}
+
+/* 连接线 */
+html:not([data-theme]) .circ-connector {
+  background:linear-gradient(180deg,var(--accent),var(--accent-mid));
+  opacity:.7; width:2px;
+}
+
+/* 量子线粒子流 */
+@keyframes wire-flow {
+  from { background-position:-200px 0; }
+  to   { background-position: 200px 0; }
+}
+html:not([data-theme]) .qwire.simulating .wl {
+  background:linear-gradient(90deg,transparent 0%,rgba(59,91,219,.08) 15%,rgba(59,91,219,.5) 50%,rgba(59,91,219,.08) 85%,transparent 100%);
+  background-size:200px 100%;
+  animation:wire-flow 1.2s linear infinite;
+  height:2px !important; opacity:1; border-radius:1px;
+}
+
+/* ─────────────────────────────────────────────────────
+   §7  CIRCUIT FOOTER — 运行按钮旗舰质感
+───────────────────────────────────────────────────── */
+html:not([data-theme]) #cf {
+  background:var(--bg-elevated);
+  border-top:1px solid var(--border-subtle);
+  box-shadow:0 -2px 12px rgba(59,91,219,0.06);
+}
+
+html:not([data-theme]) .cfb.crun {
+  position:relative; overflow:hidden;
+  background:linear-gradient(180deg,#5070e8 0%,var(--accent) 45%,#2e4cc8 100%);
+  color:#fff; border:none; font-weight:700; letter-spacing:.3px;
+  text-shadow:0 1px 2px rgba(0,0,0,.18);
+  border-radius:var(--radius-sm);
+  box-shadow:
+    inset 0  1px 0 rgba(255,255,255,.18),
+    inset 0 -1px 0 rgba(0,0,0,.12),
+    0 3px 12px rgba(59,91,219,.35),
+    0 0 0 1px rgba(59,91,219,.12);
+  animation:run-breathe 2.5s ease-in-out infinite;
+  transition:transform .15s var(--ease-out);
+}
+@keyframes run-breathe {
+  0%,100% { box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(0,0,0,.12),0 3px 12px rgba(59,91,219,.28),0 0 0 1px rgba(59,91,219,.10); }
+  50%     { box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(0,0,0,.12),0 6px 24px rgba(59,91,219,.45),0 0 0 1px rgba(59,91,219,.18); }
+}
+
+/* 扫光 */
+html:not([data-theme]) .cfb.crun::after {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.28) 48%,rgba(255,255,255,.28) 52%,transparent 65%);
+  transform:translateX(-120%);
+  transition:transform .6s ease;
+  pointer-events:none;
+}
+html:not([data-theme]) .cfb.crun:hover::after { transform:translateX(120%); }
+
+html:not([data-theme]) .cfb.crun:hover {
+  transform:translateY(-2px);
+  animation:none;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -1px 0 rgba(0,0,0,.14),
+    0 8px 28px rgba(59,91,219,.45),
+    0 0 0 1px rgba(59,91,219,.18);
+}
+html:not([data-theme]) .cfb.crun:active {
+  transform:translateY(.5px) scale(.98);
+  animation:none;
+  box-shadow:inset 0 1px 0 rgba(0,0,0,.12),0 1px 4px rgba(59,91,219,.22);
+}
+
+html:not([data-theme]) .cfb.cclr,
+html:not([data-theme]) .cfb.cund {
+  background:var(--bg-surface);
+  border-color:var(--border-medium);
+  color:var(--t7);
+  border-radius:var(--radius-sm);
+  box-shadow:var(--shadow-xs);
+  transition:all .15s;
+}
+html:not([data-theme]) .cfb.cclr:hover,
+html:not([data-theme]) .cfb.cund:hover {
+  border-color:var(--accent);
+  color:var(--accent);
+  background:var(--accent-lt);
+  box-shadow:var(--shadow-sm), 0 0 0 1px rgba(59,91,219,.10);
+}
+
+html:not([data-theme]) .cfb.ccod {
+  background:var(--c-rot-bg);
+  border:1px solid var(--c-rot-bd);
+  color:var(--c-rot-sym);
+  border-radius:var(--radius-sm);
+  transition:all .15s;
+}
+html:not([data-theme]) .cfb.ccod:hover {
+  background:#e8dfff;
+  box-shadow:0 0 0 1px var(--c-rot-bd);
+}
+
+html:not([data-theme]) #step-bar {
+  background:var(--bg-elevated);
+  border-top:1px solid var(--border-subtle);
+}
+html:not([data-theme]) .step-bar-btn {
+  background:var(--bg-surface);
+  border-color:var(--border-medium);
+  border-radius:var(--radius-sm);
+  transition:all .15s;
+}
+html:not([data-theme]) .step-bar-btn:hover { border-color:#0891b2; color:#0891b2; }
+
+/* ─────────────────────────────────────────────────────
+   §8  STATE PANEL #sp — 渐变面板 + 呼吸
+───────────────────────────────────────────────────── */
+html:not([data-theme]) #sp {
+  background:var(--bg-panel-sp);
+  border-left:1px solid var(--border-subtle);
+  box-shadow:-2px 0 16px rgba(59,91,219,0.08);
+  position:relative;
+  animation:panel-breathe-r 5.5s ease-in-out infinite;
+}
+@keyframes panel-breathe-r {
+  0%,100% { box-shadow:-2px 0 12px rgba(59,91,219,.06); }
+  50%     { box-shadow:-2px 0 24px rgba(59,91,219,.14); }
+}
+
+/* 左边缘渐变光线 */
+html:not([data-theme]) #sp::before {
+  content:'';
+  position:absolute; top:8%; bottom:8%; left:-1px; width:2px;
+  background:linear-gradient(180deg,transparent,rgba(124,58,237,.22) 30%,rgba(116,143,252,.36) 50%,rgba(124,58,237,.22) 70%,transparent);
+  pointer-events:none; z-index:3;
+}
+
+html:not([data-theme]) #bloch-wrap {
+  background:var(--bg-surface);
+  border-bottom:1px solid var(--border-subtle);
+  position:relative; overflow:hidden;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85), inset 0 -1px 0 rgba(0,0,0,.03);
+}
+
+/* 顶部精密光缝 */
+html:not([data-theme]) #bloch-wrap::before {
+  content:'';
+  position:absolute; top:0; left:12%; right:12%; height:2px; z-index:1;
+  background:linear-gradient(90deg,
+    transparent,rgba(59,91,219,.20),rgba(116,143,252,.45),rgba(59,91,219,.20),transparent);
+  animation:bloch-ledge 3s ease-in-out infinite alternate;
+}
+@keyframes bloch-ledge {
+  from { opacity:.6; }
+  to   { opacity:1;  }
+}
+
+html:not([data-theme]) #bloch-wrap::after {
+  content:'';
+  position:absolute; bottom:0; left:10%; right:10%; height:28%;
+  background:radial-gradient(ellipse at 50% 100%,rgba(59,91,219,.05) 0%,transparent 70%);
+  pointer-events:none; z-index:0;
+}
+
+html:not([data-theme]) .bloch-md-thumbbar {
+  background:rgba(245,247,255,0.85);
+  border-top:1px solid var(--border-subtle);
+}
+html:not([data-theme]) .bloch-sphere-slot:hover { background:rgba(59,91,219,.06); }
+html:not([data-theme]) .bloch-sphere-slot.focused {
+  background:var(--accent-lt);
+  outline:2px solid var(--accent);
+  outline-offset:-1px;
+}
+
+html:not([data-theme]) .bsc {
+  background:rgba(255,255,255,.8);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-sm);
+}
+html:not([data-theme]) .bsval { color:var(--accent-dk); font-weight:600; }
+
+html:not([data-theme]) .qsb {
+  border-radius:var(--radius-xs);
+  border-color:var(--border-subtle);
+  background:var(--bg-surface);
+  transition:all .14s;
+}
+html:not([data-theme]) .qsb.on {
+  background:linear-gradient(180deg,rgba(59,91,219,.06),rgba(59,91,219,.02));
+  border-color:rgba(59,91,219,.28);
+  color:var(--accent); font-weight:600;
+  box-shadow:0 0 0 2px rgba(59,91,219,.10);
+  animation:qubit-btn-glow 3s ease-in-out infinite;
+}
+@keyframes qubit-btn-glow {
+  0%,100% { box-shadow:0 0 0 2px rgba(59,91,219,.10); }
+  50%     { box-shadow:0 0 0 4px rgba(59,91,219,.06),0 0 10px rgba(59,91,219,.07); }
+}
+
+html:not([data-theme]) .bloch-md-thumb:hover { background:rgba(59,91,219,.06); border-color:var(--border-subtle); }
+html:not([data-theme]) .bloch-md-thumb.active { border-color:rgba(59,91,219,.32); background:var(--accent-lt); }
+
+html:not([data-theme]) .bloch-interp { background:rgba(255,255,255,.7); border-top:1px solid var(--border-subtle); }
+html:not([data-theme]) .bloch-formula { background:rgba(240,243,255,.7); border-top:1px solid var(--border-subtle); }
+html:not([data-theme]) .bloch-sz-btn.on { background:var(--accent-lt); border-color:rgba(59,91,219,.28); color:var(--accent); }
+
+/* ─────────────────────────────────────────────────────
+   §9  STATUS BAR — 深色收尾，与顶栏呼应
+───────────────────────────────────────────────────── */
+html:not([data-theme]) #sb {
+  background:linear-gradient(90deg,#1a2436,#1e2a3a);
+  color:rgba(255,255,255,.55);
+  border-top:1px solid rgba(255,255,255,.06);
+  font-family:var(--font-ui);
+  position:relative;
+}
+html:not([data-theme]) #sb::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(116,143,252,.30) 30%,rgba(34,211,238,.25) 65%,transparent);
+}
+
+/* ─────────────────────────────────────────────────────
+   §10  RESIZE HANDLES
+───────────────────────────────────────────────────── */
+html:not([data-theme]) .rz-pip { background:rgba(59,91,219,.22); border-radius:3px; }
+html:not([data-theme]) .rz-col:hover .rz-pip,
+html:not([data-theme]) .rz-col.dragging .rz-pip {
+  background:var(--accent); width:4px; height:60px;
+  box-shadow:0 0 8px rgba(59,91,219,.30);
+}
+html:not([data-theme]) .rz-row:hover .rz-pip,
+html:not([data-theme]) .rz-row.dragging .rz-pip {
+  background:var(--accent); height:4px; width:60px;
+  box-shadow:0 0 8px rgba(59,91,219,.30);
+}
+html:not([data-theme]) .rz-col:hover,
+html:not([data-theme]) .rz-row:hover { background:rgba(59,91,219,.03); }
+
+/* ─────────────────────────────────────────────────────
+   §11  AI PANEL
+───────────────────────────────────────────────────── */
+html:not([data-theme]) #at {
+  background:var(--bg-panel-tb);
+  border-left:1px solid var(--border-subtle);
+}
+html:not([data-theme]) .mbody {
+  background:rgba(255,255,255,.85);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-md);
+  color:var(--t7);
+}
+html:not([data-theme]) .mur .mbody {
+  background:linear-gradient(135deg,var(--accent),var(--accent-mid));
+  color:#fff; border-color:transparent;
+}
+html:not([data-theme]) .mav { animation:mav-pulse 3.5s ease-in-out infinite; }
+@keyframes mav-pulse {
+  0%,100% { box-shadow:0 0 0 0   rgba(59,91,219,.12); }
+  50%     { box-shadow:0 0 0 5px rgba(59,91,219,.06); }
+}
+
+@keyframes msg-in {
+  from { opacity:0; transform:translateY(8px); }
+  to   { opacity:1; transform:translateY(0);   }
+}
+html:not([data-theme]) .msg.mai { animation:msg-in 320ms var(--ease-out) both; }
+
+html:not([data-theme]) #aiinp:focus {
+  border-color:var(--accent);
+  outline:none;
+  box-shadow:0 0 0 3px rgba(59,91,219,.10),0 0 0 1px rgba(59,91,219,.22);
+}
+
+/* ─────────────────────────────────────────────────────
+   §12  VQE / QAOA 卡片
+───────────────────────────────────────────────────── */
+html:not([data-theme]) .ecard {
+  background:var(--bg-surface);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-md);
+  box-shadow:var(--shadow-sm);
+  transition:box-shadow .18s;
+}
+html:not([data-theme]) .ecard:hover { box-shadow:var(--shadow-md); }
+
+/* ─────────────────────────────────────────────────────
+   §13  PANELS & MODALS
+───────────────────────────────────────────────────── */
+html:not([data-theme]) .panel {
+  border-color:var(--border-subtle);
+  box-shadow:var(--shadow-sm);
+}
+html:not([data-theme]) .ppop {
+  background:var(--bg-surface);
+  border:1px solid var(--border-medium);
+  border-radius:var(--radius-md);
+  box-shadow:var(--shadow-lg);
+}
+html:not([data-theme]) .ppop-val-big { color:var(--accent); }
+html:not([data-theme]) .ppop-confirm {
+  background:linear-gradient(135deg,var(--accent),var(--accent-mid));
+  border-radius:var(--radius-sm);
+}
+html:not([data-theme]) .ppop-arrow:hover { background:var(--accent); border-color:var(--accent); }
+html:not([data-theme]) .ppop-sz-on { background:var(--accent)!important; border-color:var(--accent)!important; }
+
+html:not([data-theme]) #guide-box,
+html:not([data-theme]) .bloch-zoom-box,
+html:not([data-theme]) .bloch-gallery-box {
+  background:var(--bg-surface);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg), 0 0 0 1px var(--border-subtle);
+}
+html:not([data-theme]) .guide-next {
+  background:linear-gradient(135deg,var(--accent),var(--accent-mid));
+  border-color:transparent;
+  box-shadow:0 3px 10px rgba(59,91,219,.30);
+}
+html:not([data-theme]) .guide-step-tab.on { color:var(--accent); border-bottom-color:var(--accent); }
+html:not([data-theme]) .guide-tip { border-left-color:var(--accent); background:var(--accent-lt); color:var(--accent-dk); }
+html:not([data-theme]) .guide-dot.on { background:var(--accent); }
+
+/* ─────────────────────────────────────────────────────
+   §14  面板加载交错淡入
+───────────────────────────────────────────────────── */
+/* panel-reveal：只用 opacity + translateY，绝不用 filter/blur。
+   to 状态必须是 transform:none（不是 translateY(0)）——
+   translateY(0) 仍会创建 stacking context，transform:none 才会彻底清除。
+   fill-mode 用 forwards，避免动画前（delay 期间）闪现隐藏状态。     */
+@keyframes panel-reveal {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:none; }
+}
+html:not([data-theme]) #tb { animation:panel-breathe-l 5s ease-in-out infinite, panel-reveal 480ms var(--ease-out)  80ms forwards; }
+html:not([data-theme]) #ca { animation:panel-reveal 480ms var(--ease-out) 150ms forwards; }
+html:not([data-theme]) #sp { animation:panel-breathe-r 5.5s ease-in-out infinite, panel-reveal 480ms var(--ease-out) 220ms forwards; }
+html:not([data-theme]) #at { animation:panel-reveal 480ms var(--ease-out) 300ms forwards; }
+
+/* ─────────────────────────────────────────────────────
+   §15  REPLAY 按钮
+───────────────────────────────────────────────────── */
+html:not([data-theme]) #replay-btn.active {
+  background:var(--accent-lt);
+  border-color:rgba(59,91,219,.32);
+  color:var(--accent);
+}
+
+/* ─────────────────────────────────────────────────────
+   §16  CIRCUIT VALIDATION
+───────────────────────────────────────────────────── */
+html:not([data-theme]) .cval-panel.has-error  { border-color:#fecaca; background:rgba(254,242,242,.88); border-radius:var(--radius-sm); }
+html:not([data-theme]) .cval-panel.has-warning{ border-color:#fde68a; background:rgba(255,251,235,.88); border-radius:var(--radius-sm); }
+html:not([data-theme]) .cval-panel.has-info   { border-color:#bfdbfe; background:rgba(239,246,255,.88); border-radius:var(--radius-sm); }
+
+/* ─────────────────────────────────────────────────────
+   §17  MISC 精致细节
+───────────────────────────────────────────────────── */
+html:not([data-theme]) .qlbl { font-variant-numeric:tabular-nums; }
+
+html:not([data-theme]) .chip {
+  transition:transform .15s var(--ease-out), box-shadow .15s;
+}
+html:not([data-theme]) .chip:hover { transform:translateY(-1px); box-shadow:var(--shadow-sm); }
+html:not([data-theme]) .chip:active { transform:translateY(0); }
+
+/* ─────────────────────────────────────────────────────
+   §18  SCROLLBARS
+───────────────────────────────────────────────────── */
+html:not([data-theme]) #tb::-webkit-scrollbar,
+html:not([data-theme]) #sp::-webkit-scrollbar,
+html:not([data-theme]) #cc::-webkit-scrollbar { width:5px; height:5px; }
+html:not([data-theme]) #tb::-webkit-scrollbar-track,
+html:not([data-theme]) #sp::-webkit-scrollbar-track,
+html:not([data-theme]) #cc::-webkit-scrollbar-track { background:transparent; }
+html:not([data-theme]) #tb::-webkit-scrollbar-thumb,
+html:not([data-theme]) #sp::-webkit-scrollbar-thumb,
+html:not([data-theme]) #cc::-webkit-scrollbar-thumb { background:rgba(59,91,219,.20); border-radius:10px; }
+html:not([data-theme]) #tb::-webkit-scrollbar-thumb:hover,
+html:not([data-theme]) #sp::-webkit-scrollbar-thumb:hover,
+html:not([data-theme]) #cc::-webkit-scrollbar-thumb:hover { background:var(--accent-mid); }

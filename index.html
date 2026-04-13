@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q-Edu — 量子计算交互教学平台</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- 提前应用主题，避免白屏闪烁 -->
+<script>(function(){var t=localStorage.getItem('qedu_theme');if(t&&t!=='classic')document.documentElement.setAttribute('data-theme',t);})();</script>
+<link rel="stylesheet" href="styles.css?v=3">
+<link rel="stylesheet" href="amber-theme.css?v=1">
+<link rel="stylesheet" href="space-theme.css?v=1">
+<link rel="stylesheet" href="classic-enhance.css?v=1">
+<link rel="stylesheet" href="home-themes.css?v=1">
+</head>
+<body class="aq-root">
+
+<!-- ══ 主首页（功能模块入口）——  Premium Landing ══ -->
+<div id="main-home" class="mhp-root" style="display:none" aria-hidden="true">
+  <!-- Global background: canvas + ambient glows sit OUTSIDE .mhp-wrap so they persist across all sections -->
+  <canvas id="mhp-canvas" class="mhp-hero-canvas"></canvas>rm -rf ~/.claude/auth*
+  <div class="mhp-glow mhp-glow1"></div>
+  <div class="mhp-glow mhp-glow2"></div>
+  <div class="mhp-glow mhp-glow3"></div>
+
+<div class="mhp-wrap">
+
+  <!-- ── Section 1: Hero ── -->
+  <section class="mhp-hero">
+    <video class="mhp-sec-video" autoplay muted loop playsinline>
+      <source src="2578-银河 星云 星团-4k超清商用素材-猫灵九天.mp4" type="video/mp4">
+    </video>
+    <div class="mhp-hero-inner">
+      <p class="mhp-eyebrow"><span class="mhp-dot"></span>量子计算 × 交互教学</p>
+      <h1 class="mhp-hero-h1">探索量子世界<br><em class="mhp-grad">触手可及</em></h1>
+      <p class="mhp-hero-sub">为《人工智能通识》与《大学计算机基础》提供下一代计算架构的虚拟仿真与AI辅助实验</p>
+      <div class="mhp-course-tags" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px">
+        <span style="background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:4px 14px;font-size:12px;color:rgba(255,255,255,0.9)">📚 人工智能通识</span>
+        <span style="background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:4px 14px;font-size:12px;color:rgba(255,255,255,0.9)">🖥 大学计算机基础</span>
+        <span style="background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:4px 14px;font-size:12px;color:rgba(255,255,255,0.9)">⚛ 量子计算前沿</span>
+        <span style="background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:4px 14px;font-size:12px;color:rgba(255,255,255,0.9)">🏛 虚拟仿真实验</span>
+      </div>
+    </div>
+    <div class="mhp-scroll-cue" onclick="_mhpGoTo(1)">
+      <span class="mhp-scroll-label">向下滑动</span>
+      <div class="mhp-arrow-wrap">
+        <svg class="mhp-chevron" width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M7 10.5l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg class="mhp-chevron mhp-chevron2" width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M7 10.5l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section 2: Features ── -->
+  <section class="mhp-features">
+    <video class="mhp-sec-video" autoplay muted loop playsinline>
+      <source data-src="2583-多款银河 星云 太空-4k超清商用素材-猫灵九天.mp4" type="video/mp4">
+    </video>
+    <div class="mhp-features-inner">
+      <div class="mhp-sec-eyebrow">核心功能</div>
+      <h2 class="mhp-sec-h2">六大核心模块<br>完整量子学习闭环</h2>
+      <div class="mhp-feat-grid">
+        <div class="mhp-fcard mhp-fcard1" onclick="hmEnterCircuit()">
+          <div class="mhp-fcard-icon">
+            <svg viewBox="0 0 40 40" fill="none">
+              <line x1="4" y1="12" x2="36" y2="12" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="4" y1="20" x2="36" y2="20" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="4" y1="28" x2="36" y2="28" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="8" y="8" width="8" height="8" rx="2" fill="currentColor" opacity="0.9"/>
+              <circle cx="22" cy="12" r="3" fill="currentColor"/>
+              <circle cx="22" cy="20" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              <line x1="19" y1="20" x2="25" y2="20" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="22" y1="17" x2="22" y2="23" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="mhp-fcard-num">01</div>
+          <h3 class="mhp-fcard-title">线路编辑器</h3>
+          <p class="mhp-fcard-desc">拖放量子门，AI 实时解析，Bloch 球同步演化</p>
+          <div class="mhp-fcard-arrow">→</div>
+        </div>
+        <div class="mhp-fcard mhp-fcard2" onclick="hmEnterView('v')">
+          <div class="mhp-fcard-icon">
+            <svg viewBox="0 0 40 40" fill="none">
+              <polyline points="4,34 12,20 18,26 24,14 30,18 36,8" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+              <circle cx="36" cy="8" r="2.5" fill="currentColor"/>
+              <line x1="4" y1="34" x2="36" y2="34" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+              <line x1="4" y1="4" x2="4" y2="34" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+            </svg>
+          </div>
+          <div class="mhp-fcard-num">02</div>
+          <h3 class="mhp-fcard-title">VQE 实验</h3>
+          <p class="mhp-fcard-desc">变分量子本征求解器，可视化能量景观与收敛曲线</p>
+          <div class="mhp-fcard-arrow">→</div>
+        </div>
+        <div class="mhp-fcard mhp-fcard3" onclick="hmEnterView('q')">
+          <div class="mhp-fcard-icon">
+            <svg viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="8" r="4" fill="currentColor" opacity="0.9"/>
+              <circle cx="8" cy="28" r="4" fill="currentColor" opacity="0.7"/>
+              <circle cx="32" cy="28" r="4" fill="currentColor" opacity="0.7"/>
+              <line x1="20" y1="12" x2="8" y2="24" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="20" y1="12" x2="32" y2="24" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="8" y1="28" x2="32" y2="28" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="mhp-fcard-num">03</div>
+          <h3 class="mhp-fcard-title">QAOA</h3>
+          <p class="mhp-fcard-desc">量子近似优化算法，图上最大割问题直观求解</p>
+          <div class="mhp-fcard-arrow">→</div>
+        </div>
+        <div class="mhp-fcard mhp-fcard4" onclick="hmEnterView('l')">
+          <div class="mhp-fcard-icon">
+            <svg viewBox="0 0 40 40" fill="none">
+              <rect x="4" y="6"  width="32" height="7" rx="2" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity="0.15"/>
+              <rect x="4" y="17" width="32" height="7" rx="2" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity="0.15"/>
+              <rect x="4" y="28" width="32" height="7" rx="2" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity="0.15"/>
+              <text x="10" y="13" font-size="5" fill="currentColor" font-family="monospace" font-weight="700">Bell</text>
+              <text x="10" y="24" font-size="5" fill="currentColor" font-family="monospace" font-weight="700">GHZ</text>
+              <text x="10" y="35" font-size="5" fill="currentColor" font-family="monospace" font-weight="700">QFT</text>
+            </svg>
+          </div>
+          <div class="mhp-fcard-num">04</div>
+          <h3 class="mhp-fcard-title">算法库</h3>
+          <p class="mhp-fcard-desc">Bell / GHZ / QFT / Grover 等 8 种经典算法，一键加载</p>
+          <div class="mhp-fcard-arrow">→</div>
+        </div>
+        <div class="mhp-fcard mhp-fcard5" onclick="hmEnterCourse()">
+          <div class="mhp-fcard-icon">
+            <svg viewBox="0 0 40 40" fill="none">
+              <rect x="5" y="5" width="30" height="22" rx="3" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity="0.12"/>
+              <line x1="5" y1="27" x2="35" y2="27" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="20" y1="27" x2="20" y2="34" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="13" y1="34" x2="27" y2="34" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="12" cy="15" r="2.5" fill="currentColor" opacity="0.7"/>
+              <circle cx="20" cy="15" r="2.5" fill="currentColor" opacity="0.7"/>
+              <circle cx="28" cy="15" r="2.5" fill="currentColor" opacity="0.7"/>
+              <path d="M12 15 L20 15 L28 15" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+              <polyline points="10,11 14,15 10,19" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="mhp-fcard-num">05</div>
+          <h3 class="mhp-fcard-title">课程模式</h3>
+          <p class="mhp-fcard-desc">前测 → 3 个引导实验 → 后测 → 证书，完整教学闭环</p>
+          <div class="mhp-fcard-arrow">→</div>
+        </div>
+        <div class="mhp-fcard mhp-fcard6" onclick="hmEnterView('m')">
+          <div class="mhp-fcard-icon">
+            <svg viewBox="0 0 40 40" fill="none">
+              <rect x="4" y="8" width="32" height="20" rx="3" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity="0.12"/>
+              <polygon points="17,13 17,23 27,18" fill="currentColor" opacity="0.85"/>
+              <line x1="4" y1="32" x2="13" y2="32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="18" y1="32" x2="22" y2="32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="27" y1="32" x2="36" y2="32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="mhp-fcard-num">06</div>
+          <h3 class="mhp-fcard-title">微课中心</h3>
+          <p class="mhp-fcard-desc">10+ 段精品微课视频，量子叠加、纠缠、算法逐步讲解</p>
+          <div class="mhp-fcard-arrow">→</div>
+        </div>
+      </div>
+    </div>
+    <div class="mhp-scroll-cue" onclick="_mhpGoTo(2)">
+      <span class="mhp-scroll-label">向下滑动</span>
+      <div class="mhp-arrow-wrap">
+        <svg class="mhp-chevron" width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M7 10.5l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="mhp-chevron mhp-chevron2" width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M7 10.5l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section 3: Interactive Bloch sphere ── -->
+  <section class="mhp-bloch-sec">
+    <video class="mhp-sec-video" autoplay muted loop playsinline>
+      <source data-src="2582-星系 穿梭 时空-4k超清商用素材-猫灵九天.mp4" type="video/mp4">
+    </video>
+    <div class="mhp-bloch-inner">
+      <div class="mhp-bloch-text">
+        <div class="mhp-sec-eyebrow">交互演示</div>
+        <h2 class="mhp-sec-h2">Bloch 球<br>量子态的几何直觉</h2>
+        <p class="mhp-bloch-sub">每次量子门操作，都是球面上的一次旋转。拖动鼠标，亲身感受量子态演化的几何本质。</p>
+        <ul class="mhp-bloch-list">
+          <li><span class="mhp-list-dot"></span>|0⟩ 和 |1⟩ 是球的南北极</li>
+          <li><span class="mhp-list-dot"></span>叠加态 = 球面上任意一点</li>
+          <li><span class="mhp-list-dot"></span>H 门 = 绕 X+Z 轴旋转 180°</li>
+        </ul>
+      </div>
+      <div class="mhp-bloch-canvas-wrap">
+        <canvas id="mhp-bloch" width="380" height="380"></canvas>
+      </div>
+    </div>
+    <div class="mhp-scroll-cue" onclick="_mhpGoTo(3)">
+      <span class="mhp-scroll-label">向下滑动</span>
+      <div class="mhp-arrow-wrap">
+        <svg class="mhp-chevron" width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M7 10.5l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="mhp-chevron mhp-chevron2" width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M7 10.5l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section 4: Metrics ── -->
+  <section class="mhp-metrics">
+    <video class="mhp-sec-video" autoplay muted loop playsinline>
+      <source data-src="2590-星云 星体 宇宙-4k超清商用素材-猫灵九天.mp4" type="video/mp4">
+    </video>
+    <div class="mhp-metrics-inner">
+      <div class="mhp-metric-card">
+        <div class="mhp-metric-val">12</div>
+        <div class="mhp-metric-key">最大量子比特</div>
+        <div class="mhp-metric-sub">最多 12 量子比特实时仿真</div>
+      </div>
+      <div class="mhp-metric-card">
+        <div class="mhp-metric-val">8</div>
+        <div class="mhp-metric-key">算法库</div>
+        <div class="mhp-metric-sub">Bell / GHZ / QFT / Grover / Deutsch 等经典算法</div>
+      </div>
+      <div class="mhp-metric-card">
+        <div class="mhp-metric-val">AI</div>
+        <div class="mhp-metric-key">智能导师</div>
+        <div class="mhp-metric-sub">每步操作即时 AI 教学注释与量子态解读</div>
+      </div>
+      <div class="mhp-metric-card">
+        <div class="mhp-metric-val">10+</div>
+        <div class="mhp-metric-key">微课视频</div>
+        <div class="mhp-metric-sub">量子叠加、纠缠、VQE、QAOA 专题微课</div>
+      </div>
+    </div>
+    <div class="mhp-scroll-cue" onclick="_mhpGoTo(4)">
+      <span class="mhp-scroll-label">向下滑动</span>
+      <div class="mhp-arrow-wrap">
+        <svg class="mhp-chevron" width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M7 10.5l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="mhp-chevron mhp-chevron2" width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M7 10.5l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section 5: CTA ── -->
+  <section class="mhp-cta">
+    <video class="mhp-sec-video" autoplay muted loop playsinline>
+      <source data-src="2589-星云 太空 宇宙-4k超清商用素材-猫灵九天.mp4" type="video/mp4">
+    </video>
+    <div class="mhp-cta-glow"></div>
+    <div class="mhp-cta-inner">
+      <h2 class="mhp-cta-h2">立即开始<br>你的量子之旅</h2>
+      <div class="mhp-hero-btns">
+        <button class="mhp-btn-primary mhp-btn-lg" onclick="hmEnterCourse()">
+          进入课程模式
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="mhp-btn-ghost" onclick="hmEnterCircuit()">
+          自由探索
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <p class="mhp-foot-note">© 2026 Q-Edu · 量子计算虚拟仿真教学平台 · 适用于计算机基础与应用类课程</p>
+    </div>
+  </section>
+
+</div><!-- /.mhp-wrap -->
+</div>
+<!-- ══ /主首页 ══ -->
+
+<!-- Premium landing: snap-scroll navigation dots (outside #main-home so position:fixed works cleanly) -->
+<nav id="mhp-dots" class="mhp-nav-dots" aria-label="页面导航" style="display:none">
+  <button class="mhp-nav-dot mhp-nd-act" onclick="_mhpGoTo(0)" title="首页"></button>
+  <button class="mhp-nav-dot" onclick="_mhpGoTo(1)" title="功能介绍"></button>
+  <button class="mhp-nav-dot" onclick="_mhpGoTo(2)" title="Bloch 球"></button>
+  <button class="mhp-nav-dot" onclick="_mhpGoTo(3)" title="平台数据"></button>
+  <button class="mhp-nav-dot" onclick="_mhpGoTo(4)" title="开始使用"></button>
+</nav>
+
+<!-- ══ 首屏首页（教学入口）—— Step 1: HTML 骨架 ══ -->
+<div id="home-screen" class="home-screen" style="display:none" aria-hidden="true">
+  <video class="screen-bg-video" autoplay muted loop playsinline>
+    <source data-src="2587-星云 星河-4k超清商用素材-猫灵九天.mp4" type="video/mp4">
+  </video>
+  <div class="hs-scroll">
+  <div class="hs-content">
+
+    <!-- 顶部：Logo + 标题 + 简介 -->
+    <div class="hs-head">
+      <div class="hs-logo-ring">Q</div>
+      <h1 class="hs-title">Q-Edu</h1>
+      <p class="hs-tagline">量子计算虚拟仿真教学平台</p>
+      <p class="hs-desc">课程模式 · 引导实验 · 微课中心 · AI 导师 · 可视化仿真 · 代码导出</p>
+    </div>
+
+    <!-- 中部：双模式入口 -->
+    <div class="hs-mode-entry">
+      <button class="hs-mode-btn hs-mode-course" onclick="openCourseMode()">
+        <span class="hs-mode-icon">📚</span>
+        <span class="hs-mode-label">课程模式</span>
+        <span class="hs-mode-sub">前测 → 3个引导实验 → 后测 → 证书</span>
+      </button>
+      <button class="hs-mode-btn hs-mode-free" onclick="hsEnterApp()">
+        <span class="hs-mode-icon">🔬</span>
+        <span class="hs-mode-label">自由探索</span>
+        <span class="hs-mode-sub">线路编辑 · VQE · QAOA · 算法库 · 微课</span>
+      </button>
+    </div>
+
+    <!-- 中部：实验选择卡片 -->
+    <div class="hs-section">
+      <div class="hs-section-title">快速开始一个实验</div>
+      <div class="hs-exp-grid">
+
+        <button class="hs-exp-card hs-exp-bell" onclick="hsStartPreset('bell')">
+          <div class="hs-exp-badge">入门推荐</div>
+          <div class="hs-exp-sym">|Φ⁺⟩</div>
+          <div class="hs-exp-name">Bell 态</div>
+          <div class="hs-exp-info">最大量子纠缠 · 2 量子比特</div>
+          <div class="hs-exp-kps">量子叠加 · 量子纠缠 · H门 · CNOT</div>
+        </button>
+
+        <button class="hs-exp-card hs-exp-ghz" onclick="hsStartPreset('ghz')">
+          <div class="hs-exp-badge">基础</div>
+          <div class="hs-exp-sym">|GHZ⟩</div>
+          <div class="hs-exp-name">GHZ 态</div>
+          <div class="hs-exp-info">三体量子纠缠 · 多比特叠加</div>
+          <div class="hs-exp-kps">多比特纠缠 · 非局域性 · GHZ态</div>
+        </button>
+
+        <button class="hs-exp-card hs-exp-qft" onclick="hsStartPreset('qft')">
+          <div class="hs-exp-badge">进阶</div>
+          <div class="hs-exp-sym">QFT</div>
+          <div class="hs-exp-name">量子傅里叶变换</div>
+          <div class="hs-exp-info">量子算法核心子程序</div>
+          <div class="hs-exp-kps">量子傅里叶变换 · 相位估计 · 量子算法</div>
+        </button>
+
+        <button class="hs-exp-card hs-exp-grover" onclick="hsStartPreset('grover')">
+          <div class="hs-exp-badge">进阶</div>
+          <div class="hs-exp-sym">G²</div>
+          <div class="hs-exp-name">Grover 搜索</div>
+          <div class="hs-exp-info">平方加速 · 量子搜索算法</div>
+          <div class="hs-exp-kps">Grover算法 · Oracle · 振幅放大 · 平方加速</div>
+        </button>
+
+        <button class="hs-exp-card hs-exp-blank" onclick="hsStartBlank()">
+          <div class="hs-exp-sym">＋</div>
+          <div class="hs-exp-name">空白线路</div>
+          <div class="hs-exp-info">从头开始，自由搭建</div>
+          <div class="hs-exp-kps">自由探索 · 线路设计 · 仿真验证</div>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- 中部：功能快速入口 -->
+    <div class="hs-section">
+      <div class="hs-section-title">探索更多功能</div>
+      <div class="hs-feat-grid">
+
+        <button class="hs-feat-card hs-feat-micro" onclick="hsGoTo('m')">
+          <div class="hs-feat-icon">🎬</div>
+          <div class="hs-feat-main">
+            <div class="hs-feat-name">微课中心</div>
+            <div class="hs-feat-desc">10节精品视频 · 基础→进阶系统学习</div>
+          </div>
+          <div class="hs-feat-arrow">→</div>
+        </button>
+
+        <button class="hs-feat-card hs-feat-algo" onclick="hsGoTo('l')">
+          <div class="hs-feat-icon">📐</div>
+          <div class="hs-feat-main">
+            <div class="hs-feat-name">算法库</div>
+            <div class="hs-feat-desc">8个经典量子算法 · 动画演示 · 一键加载</div>
+          </div>
+          <div class="hs-feat-arrow">→</div>
+        </button>
+
+        <button class="hs-feat-card hs-feat-vqe" onclick="hsGoTo('v')">
+          <div class="hs-feat-icon">⚛️</div>
+          <div class="hs-feat-main">
+            <div class="hs-feat-name">VQE 变分量子算法</div>
+            <div class="hs-feat-desc">H₂、LiH 分子基态能量模拟 · 量子化学</div>
+          </div>
+          <div class="hs-feat-arrow">→</div>
+        </button>
+
+        <button class="hs-feat-card hs-feat-qaoa" onclick="hsGoTo('q')">
+          <div class="hs-feat-icon">🔀</div>
+          <div class="hs-feat-main">
+            <div class="hs-feat-name">QAOA 量子优化</div>
+            <div class="hs-feat-desc">Max-Cut 组合优化 · 量子叠加探索最优解</div>
+          </div>
+          <div class="hs-feat-arrow">→</div>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- 底部：跳过按钮 + 版权 -->
+    <div class="hs-foot">
+      <button class="hs-skip-btn" onclick="hsEnterApp()">直接进入工作台 →</button>
+      <p class="hs-foot-note">© 2026 Q-Edu · 量子计算虚拟仿真教学平台 · 适用于计算机基础与应用类课程</p>
+    </div>
+
+  </div>
+  </div><!-- /.hs-scroll -->
+</div>
+<!-- ══ /首屏首页 ══ -->
+
+<header class="aq-topbar">
+  <div class="logo aq-brand" onclick="goHome()" style="cursor:pointer" title="返回主页"><div class="logo-ring aq-brand-badge">Q</div>Q-Edu</div>
+  <div class="ntabs aq-nav">
+    <div class="ntab aq-nav-tab on" onclick="setView('c',this)" data-i18n="nav.circ">线路编辑器</div>
+    <div class="ntab aq-nav-tab" onclick="setView('v',this)" data-i18n="nav.vqe">量子参数优化（VQE）</div>
+    <div class="ntab aq-nav-tab" onclick="setView('q',this)" data-i18n="nav.qaoa">量子组合优化（QAOA）</div>
+    <div class="ntab aq-nav-tab" onclick="setView('l',this)" data-i18n="nav.algo">线路模板</div>
+    <div class="ntab aq-nav-tab" onclick="setView('m',this)">🎬 微课中心</div>
+    <div class="ntab aq-nav-tab" onclick="setView('r',this)" data-i18n="nav.resources">📖 学习资料库</div>
+    <div class="ntab aq-nav-tab ntab-course" onclick="openCourseMode()">📚 学习模式</div>
+  </div>
+  <div class="hright aq-topbar-actions">
+
+    <div class="hbadge" onclick="toggleConnMode()" title="点击切换强制本地模式"><div class="hdot"></div><span id="conn-lbl">检测中...</span></div>
+    <div class="hmore-wrap">
+      <button class="hbtn aq-console-btn hmore-trigger">···</button>
+      <div class="hmore-menu">
+        <div class="hmore-item" onclick="openSettings()" data-i18n="hbtn.settings">⚙ 设置</div>
+        <div class="hmore-item" onclick="openIntro()" data-i18n="hbtn.about">∷ 关于</div>
+        <div class="hmore-item" onclick="openGuide()" data-i18n="hbtn.guide">? 新手指南</div>
+      </div>
+    </div>
+    <div id="user-ctrl-guest" style="display:flex;gap:4px;margin-left:4px">
+      <button class="hbtn aq-console-btn" onclick="openAuthModal('login')" data-i18n="hbtn.login">登录</button>
+      <button class="hbtn hi aq-console-btn aq-console-btn-primary" onclick="openAuthModal('register')" data-i18n="hbtn.register">注册</button>
+    </div>
+    <div id="user-ctrl-auth" style="display:none;gap:4px;align-items:center;margin-left:4px">
+      <button class="hbtn aq-console-btn" onclick="openProfile()" id="user-name-btn">👤 用户</button>
+      <button class="hbtn aq-console-btn" onclick="authLogout()">退出</button>
+    </div>
+  </div>
+</header>
+
+<!-- 移动端面板切换条（桌面端通过 CSS 隐藏） -->
+<div id="mobile-panel-bar">
+  <button class="mpb-btn mpb-act" onclick="setMobilePanel(1)">☰ 工具</button>
+  <button class="mpb-btn" onclick="setMobilePanel(2)">⊞ 主视图</button>
+  <button class="mpb-btn" onclick="setMobilePanel(3)">📊 状态</button>
+</div>
+
+<!-- Circuit View -->
+<div id="cv" class="aq-console-grid" data-mpanel="2">
+  <!-- TOOLBAR -->
+  <div class="panel aq-panel aq-panel-gates" id="tb">
+    <div class="ph aq-panel-head"><span data-i18n="ph.gate">量子门</span> <span style="color:var(--navy);font-weight:500" id="gcount-lbl">0 门</span></div>
+    <div class="gcat" data-i18n="cat.single">单量子比特</div>
+    <div class="ggrid aq-gate-grid">
+      <div class="gi aq-gate-card gs" draggable="true" data-g="H"><div class="gsym">H</div><div class="glbl">Hadamard</div></div>
+      <div class="gi aq-gate-card gs" draggable="true" data-g="X"><div class="gsym">X</div><div class="glbl">Pauli-X</div></div>
+      <div class="gi aq-gate-card gs" draggable="true" data-g="Y"><div class="gsym">Y</div><div class="glbl">Pauli-Y</div></div>
+      <div class="gi aq-gate-card gs" draggable="true" data-g="Z"><div class="gsym">Z</div><div class="glbl">Pauli-Z</div></div>
+      <div class="gi aq-gate-card gs" draggable="true" data-g="S"><div class="gsym">S</div><div class="glbl">S Gate</div></div>
+      <div class="gi aq-gate-card gs" draggable="true" data-g="T"><div class="gsym">T</div><div class="glbl">T Gate</div></div>
+    </div>
+    <div class="gcat" data-i18n="cat.rot">旋转门（可调角度）</div>
+    <div class="ggrid aq-gate-grid">
+      <div class="gi aq-gate-card gr" draggable="true" data-g="Rx"><div class="gsym">R<sub>x</sub></div><div class="glbl">Rotate-X</div></div>
+      <div class="gi aq-gate-card gr" draggable="true" data-g="Ry"><div class="gsym">R<sub>y</sub></div><div class="glbl">Rotate-Y</div></div>
+      <div class="gi aq-gate-card gr" draggable="true" data-g="Rz"><div class="gsym">R<sub>z</sub></div><div class="glbl">Rotate-Z</div></div>
+    </div>
+    <div class="gcat" data-i18n="cat.two">双量子比特</div>
+    <div class="ggrid aq-gate-grid">
+      <div class="gi aq-gate-card gt" draggable="true" data-g="CNOT"><div class="gsym">⊕</div><div class="glbl">CNOT</div></div>
+      <div class="gi aq-gate-card gt" draggable="true" data-g="CZ"><div class="gsym">CZ</div><div class="glbl">Control-Z</div></div>
+      <div class="gi aq-gate-card gt" draggable="true" data-g="SWAP"><div class="gsym">✕</div><div class="glbl">SWAP</div></div>
+    </div>
+    <div class="gcat" data-i18n="cat.meas">测量</div>
+    <div class="ggrid aq-gate-grid">
+      <div class="gi aq-gate-card gm" draggable="true" data-g="M"><div class="gsym">M</div><div class="glbl">Measure</div></div>
+    </div>
+    <div class="gcat" data-i18n="cat.mgmt">线路管理</div>
+    <div class="aq-tool-meta-row" style="display:flex;gap:4px;padding:0 8px 8px;">
+      <button id="btn-save-circ" onclick="doSaveCircuit()" data-i18n="tb.save" title="保存线路（需登录）" class="aq-console-btn aq-console-btn-soft circ-mgmt-btn auth-btn-locked">保存</button>
+      <button id="btn-load-circ" onclick="doLoadCircuit()" data-i18n="tb.load" title="载入已保存线路（需登录）" class="aq-console-btn aq-console-btn-soft circ-mgmt-btn auth-btn-locked">载入</button>
+    </div>
+    <div class="gcat" data-i18n="cat.preset">预置线路</div>
+    <div class="plist">
+      <button class="pbtn aq-console-btn aq-console-btn-soft" onclick="loadPreset('bell')">Bell 态（最大纠缠）</button>
+      <button class="pbtn aq-console-btn aq-console-btn-soft" onclick="loadPreset('ghz')">GHZ 态（三体纠缠）</button>
+      <button class="pbtn aq-console-btn aq-console-btn-soft" onclick="loadPreset('qft')">QFT（量子傅里叶）</button>
+      <button class="pbtn aq-console-btn aq-console-btn-soft" onclick="loadPreset('grover')">Grover 搜索</button>
+    </div>
+  </div>
+
+  <!-- CIRCUIT AREA -->
+  <div class="panel aq-panel aq-panel-canvas" id="ca" style="position:relative">
+    <div class="ph aq-panel-head" id="ca-head">
+      <span data-i18n="ph.circ">量子线路画布</span>
+      <span style="color:var(--t5);font-size:11px;margin:0 8px" id="depth-lbl">深度 0</span>
+      <button class="cfb crun aq-console-btn aq-console-btn-primary" onclick="runSim()" data-i18n="btn.run">▶ 运行模拟</button>
+      <button id="btn-undo" class="cfb cund aq-console-btn" onclick="undo()" data-i18n="btn.undo">↩ 撤销</button>
+      <button id="btn-redo" class="cfb cund aq-console-btn" onclick="redo()" data-i18n="btn.redo">↪ 重做</button>
+      <button class="cfb cclr aq-console-btn" onclick="clearCircuit()" data-i18n="btn.clear">清空</button>
+      <div class="cfstats">
+        <span id="stat-gates">0 门</span>
+        <div class="qctrl">
+          <div class="qb" onclick="rmQ()">−</div>
+          <span id="qcount-d" style="font-size:11px">3 量子比特</span>
+          <div class="qb" onclick="addQ()">+</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧悬浮操作条 -->
+    <div class="fab-strip">
+      <button class="fab-item" onclick="enterStepMode()">
+        <span class="fab-label" data-i18n="btn.step">逐步演化</span><span class="fab-icon">⊢</span>
+      </button>
+      <button class="fab-item" id="replay-btn" onclick="startReplay()">
+        <span class="fab-label" data-i18n="btn.replay">逐步播放</span><span class="fab-icon">▶︎</span>
+      </button>
+      <button class="fab-item" onclick="openModal()">
+        <span class="fab-label" data-i18n="btn.export">导出代码</span><span class="fab-icon">&lt;/&gt;</span>
+      </button>
+      <button class="fab-item report-btn" onclick="generateReport()">
+        <span class="fab-label" data-i18n="btn.report">生成报告</span><span class="fab-icon">&#128196;</span>
+      </button>
+      <button class="fab-item" onclick="shareCircuit()">
+        <span class="fab-label" data-i18n="btn.share">分享线路</span><span class="fab-icon">&#8599;</span>
+      </button>
+    </div>
+
+    <div id="cc" class="aq-canvas-frame"><div class="ci aq-canvas-grid" id="ci"></div></div>
+    <div id="step-bar">
+      <button class="step-bar-btn" onclick="stepBack()">◀ 上一步</button>
+      <span class="step-bar-lbl" id="step-lbl">第 0 / 8 步</span>
+      <button class="step-bar-btn" onclick="stepForward()">下一步 ▶</button>
+      <button class="step-bar-btn step-exit" onclick="exitStepMode()">✕ 退出</button>
+    </div>
+    <div id="cval-panel" class="cval-panel hidden"></div>
+  </div>
+
+  <!-- STATE PANEL -->
+  <div class="panel aq-panel aq-panel-state" id="sp">
+    <div class="ph aq-panel-head" style="flex-shrink:0" data-i18n="ph.state">量子态可视化</div>
+    <div class="sp-tabs">
+      <div class="sp-tab aq-nav-tab on" onclick="switchSpTab('bloch',this)" data-i18n="sp.bloch">Bloch 球</div>
+      <div class="sp-tab aq-nav-tab" onclick="switchSpTab('dm',this)" data-i18n="sp.dm">密度矩阵 ρ</div>
+      <div class="sp-tab aq-nav-tab" onclick="switchSpTab('ent',this)" data-i18n="sp.ent">纠缠图</div>
+    </div>
+    <!-- Tab: Bloch sphere (existing) -->
+    <div class="sp-pane on" id="sp-bloch">
+      <div id="bloch-wrap" class="aq-bloch-wrap">
+        <div id="bloch-multi" class="bloch-multi-row"></div>
+        <div class="bloch-sz-ctrl">
+          <span class="bloch-sz-lbl">排列</span>
+          <button class="bloch-sz-btn on" data-pr="2" onclick="setBlochSz(2)">小</button>
+          <button class="bloch-sz-btn" data-pr="1" onclick="setBlochSz(1)">大</button>
+          <button class="bloch-gallery-btn" onclick="openBlochGallery()" title="展开全部 / Expand all">⊞</button>
+        </div>
+      </div>
+      <div class="qsel-bar" id="qsel-bar"></div>
+      <div class="bstats">
+        <div class="bsc"><div class="bslbl">⟨X⟩</div><div class="bsval" id="bx">0.00</div></div>
+        <div class="bsc"><div class="bslbl">⟨Y⟩</div><div class="bsval" id="by">0.00</div></div>
+        <div class="bsc"><div class="bslbl">⟨Z⟩</div><div class="bsval" id="bz">1.00</div></div>
+      </div>
+      <div class="bstats bstats-2">
+        <div class="bsc"><div class="bslbl">θ 极角</div><div class="bsval bsval-sm" id="b-theta">0.0°</div></div>
+        <div class="bsc"><div class="bslbl">φ 方位角</div><div class="bsval bsval-sm" id="b-phi">0.0°</div></div>
+        <div class="bsc"><div class="bslbl">P(|0⟩)</div><div class="bsval bsval-sm" id="b-p0">1.000</div></div>
+        <div class="bsc"><div class="bslbl">P(|1⟩)</div><div class="bsval bsval-sm" id="b-p1">0.000</div></div>
+      </div>
+      <div class="bloch-interp">
+        <span class="bi-chip bi-chip-0" id="bi-chip">|0⟩ 基态</span>
+        <span class="bi-desc" id="bi-desc">北极点 · 测量恒得 |0⟩</span>
+      </div>
+      <div class="bloch-formula">
+        <div class="bf-tmpl">|ψ⟩ = cos(θ/2)|0⟩ + e<sup>iφ</sup>·sin(θ/2)|1⟩</div>
+        <div class="bf-vals">
+          <span class="bf-eq">= </span><span class="bf-coef" id="b-alpha">1.000</span><span class="bf-ket">|0⟩</span><span class="bf-plus"> + e<sup>i·<span class="bf-phase" id="b-phi-deg">0.0°</span></sup>·</span><span class="bf-coef" id="b-beta">0.000</span><span class="bf-ket">|1⟩</span>
+        </div>
+        <div class="bf-hint">|α|²+|β|²=1 · 北极=|0⟩ · 南极=|1⟩ · 赤道=等权叠加</div>
+      </div>
+      <div id="prob-sec">
+        <div class="prob-hdr">
+          <span class="prob-lbl">测量概率分布</span>
+          <span style="font-size:12px;font-family:var(--mono);color:var(--t5)" id="state-lbl">|0⟩</span>
+        </div>
+        <div id="prob-qsel-wrap">
+          <span class="dm-qsel-lbl">关注比特</span>
+          <div id="prob-qsel-bar"></div>
+        </div>
+        <canvas id="prob-cv"></canvas>
+      </div>
+      <div id="sv-sec">
+        <div class="sv-ttl">态矢量分量<span id="sim-src-lbl" style="font-size:10px;font-family:var(--mono);margin-left:6px"></span></div>
+        <div id="sv-rows"></div>
+      </div>
+    </div>
+    <!-- Tab: Density matrix -->
+    <div class="sp-pane" id="sp-dm">
+      <div id="dm-wrap">
+        <div id="dm-qsel-wrap">
+          <span class="dm-qsel-lbl">关注比特</span>
+          <div id="dm-qsel-bar"></div>
+          <span class="dm-qsel-hint">（最多选 4 个）</span>
+        </div>
+        <div style="padding:6px 8px 0">
+        <div id="dm-re-label" style="font-size:11px;font-family:var(--mono);color:var(--t7);padding:2px 0 4px;letter-spacing:.6px;">RE(ρ) 实部热图</div>
+        <canvas id="dm-cv"></canvas>
+        <div id="dm-im-label" style="margin-top:8px;font-size:11px;font-family:var(--mono);color:var(--t7);letter-spacing:.6px;">IM(ρ) 虚部热图</div>
+        <canvas id="dm-cv-im"></canvas>
+        <div id="dm-note" style="font-size:11px;color:var(--t7);font-family:var(--mono);padding:8px 2px;line-height:1.6;display:none"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Tab: Entanglement -->
+    <div class="sp-pane" id="sp-ent">
+      <div style="padding:8px 9px;font-size:11px;font-family:var(--mono);color:var(--t7);letter-spacing:.8px;">单比特冯诺依曼熵（量化与其余比特的纠缠）</div>
+      <canvas id="ent-cv" style="display:block;width:100%;padding:0 6px"></canvas>
+      <div id="ent-detail" style="padding:6px 9px;font-size:11px;font-family:var(--mono);color:var(--t7);border-top:1px solid var(--b1);line-height:1.8;flex-shrink:0;"></div>
+    </div>
+  </div>
+
+  <!-- AI TUTOR -->
+  <div class="panel aq-panel aq-panel-assistant" id="at">
+    <div class="ph aq-panel-head">
+      量子导师 · DeepSeek
+      <div class="chips">
+        <div class="chip aq-console-chip" onclick="quickAsk('这个门的物理意义？')">物理意义</div>
+        <div class="chip aq-console-chip" onclick="quickAsk('当前线路如何优化？')">优化建议</div>
+        <div class="chip aq-console-chip" onclick="quickAsk('什么是量子纠缠？')">量子纠缠</div>
+        <div class="chip aq-console-chip" onclick="quickAsk('解释 Bloch 球')">Bloch 球</div>
+        <div class="chip aq-console-chip" onclick="quickAsk('当前整体线路有哪些潜在问题或优化建议？')">线路诊断</div>
+        <div class="chip aq-console-chip ai-opt-chip" onclick="aiOptimizeCircuit()">⚡ AI改电路</div>
+        <div class="chip aq-console-chip" onclick="quickAsk('用初学者能理解的方式，解释当前线路实现了什么量子操作，以及为什么要这样设计')">白话解释</div>
+        <div class="chip aq-console-chip" onclick="quickAsk('这个实验涉及哪些量子计算课程的知识点？请逐条列举，并说明每个知识点的重要性')">知识点</div>
+      </div>
+    </div>
+    <div class="aq-assistant-shell" style="display:flex;flex:1;overflow:hidden;">
+      <div class="ai-mascot aq-mascot-panel">
+        <svg id="mascot-svg" class="aq-mascot-svg" viewBox="0 0 80 110" width="50" height="64" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="40" cy="72" rx="32" ry="10" stroke="#93C5FD" stroke-width="1.5" fill="none" opacity="0.45" transform="rotate(-18 40 72)"/>
+          <rect x="23" y="63" width="34" height="26" rx="9" fill="#1B3A6B"/>
+          <rect x="29" y="70" width="22" height="2" rx="1" fill="rgba(255,255,255,0.2)"/>
+          <rect x="29" y="75" width="15" height="1.5" rx="1" fill="rgba(255,255,255,0.12)"/>
+          <circle cx="40" cy="79" r="3" fill="#60A5FA" opacity="0.8"/>
+          <circle cx="40" cy="79" r="1.5" fill="#BFDBFE"/>
+          <rect x="34" y="57" width="12" height="8" rx="3" fill="#2563EB" opacity="0.7"/>
+          <circle cx="40" cy="38" r="22" fill="#2D5AA0"/>
+          <ellipse cx="34" cy="27" rx="8" ry="5.5" fill="rgba(255,255,255,0.1)" transform="rotate(-25 34 27)"/>
+          <rect x="16" y="30" width="8" height="14" rx="4" fill="#1B3A6B"/>
+          <rect x="56" y="30" width="8" height="14" rx="4" fill="#1B3A6B"/>
+          <circle cx="20" cy="37" r="2.5" fill="#60A5FA"/>
+          <circle cx="60" cy="37" r="2.5" fill="#60A5FA"/>
+          <rect x="38.5" y="10" width="3" height="16" rx="1.5" fill="#1B3A6B"/>
+          <circle cx="40" cy="8" r="5.5" fill="#2563EB" opacity="0.6" id="ant-tip"/>
+          <circle cx="40" cy="8" r="3.5" fill="#93C5FD"/>
+          <circle cx="40" cy="8" r="1.5" fill="white"/>
+          <circle cx="31" cy="36" r="8" fill="white"/>
+          <circle cx="49" cy="36" r="8" fill="white"/>
+          <g class="eye-group" style="transform-origin:31px 36px">
+            <circle cx="31" cy="36" r="5" fill="#1B3A6B"/>
+            <circle cx="32.5" cy="34.5" r="1.8" fill="white"/>
+          </g>
+          <g class="eye-group right" style="transform-origin:49px 36px">
+            <circle cx="49" cy="36" r="5" fill="#1B3A6B"/>
+            <circle cx="50.5" cy="34.5" r="1.8" fill="white"/>
+          </g>
+          <ellipse cx="23" cy="43" rx="4" ry="2.5" fill="rgba(252,165,165,0.4)"/>
+          <ellipse cx="57" cy="43" rx="4" ry="2.5" fill="rgba(252,165,165,0.4)"/>
+          <path d="M 31 47 Q 40 54 49 47" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" id="mascot-mouth"/>
+          <ellipse cx="40" cy="72" rx="32" ry="10" stroke="#60A5FA" stroke-width="1.5" fill="none" stroke-dasharray="22 42" opacity="0.55" transform="rotate(-18 40 72)"/>
+          <circle cx="72" cy="72" r="3.5" fill="#60A5FA" id="mascot-electron"/>
+        </svg>
+        <div class="mascot-name">Qubit</div>
+        <div class="mascot-status" id="mascot-status">在线</div>
+      </div>
+      <div class="ai-body aq-assistant-body">
+        <div id="aim" class="aq-assistant-feed">
+          <div class="msg mai aq-assistant-msg">
+            <div class="mav">AI</div>
+            <div class="mbody aq-assistant-bubble">你好！我是 Qubit，你的量子计算导师。当前所有比特处于基态 <span class="fm">|0⟩</span>。<br><br>从左侧拖一个 <span class="fm">H</span> 门到线路上开始实验——Bloch 球会实时演示量子态的旋转。</div>
+          </div>
+        </div>
+        <div id="airw" class="aq-assistant-input-row">
+          <input id="aiinp" class="aq-assistant-input" placeholder="问我量子计算的任何问题..." onkeydown="if(event.key==='Enter')sendAI()">
+          <button id="aisnd" class="aq-console-btn aq-console-btn-primary" onclick="sendAI()">↑</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rz rz-col" id="rz-l"><div class="rz-pip"></div></div>
+  <div class="rz rz-col" id="rz-r"><div class="rz-pip"></div></div>
+  <div class="rz rz-row" id="rz-b"><div class="rz-pip"></div></div>
+</div>
+
+<!-- VQE View -->
+<div id="vv" style="display:none" data-mpanel="1">
+  <div class="rz rz-col" id="rz-vv-l"><div class="rz-pip"></div></div>
+  <div class="rz rz-col" id="rz-vv-r"><div class="rz-pip"></div></div>
+  <div class="vqecol" id="vqecol-1">
+    <details class="edu-bg-panel" style="margin-bottom:10px;border:1px solid var(--b1);border-radius:6px;padding:8px 12px;background:var(--surf)" open>
+      <summary style="cursor:pointer;font-size:12px;font-weight:600;color:var(--navy);list-style:none;user-select:none">
+        📘 实验背景与知识点 <span class="edu-bg-hint" style="font-size:11px;color:var(--t5);font-weight:400"></span>
+      </summary>
+      <div style="font-size:12px;color:var(--t7);line-height:1.85;margin-top:8px;font-family:var(--mono)">
+        <b>VQE（变分量子本征求解器）</b>是量子化学的核心量子算法，用于求解分子基态能量。<br>
+        <b>核心思想：</b>用参数化量子线路（Ansatz）近似基态波函数，通过经典优化器调节参数使期望能量最小化。<br>
+        <b>知识点：</b>哈密顿量 · 变分原理 · 参数化量子线路 · 经典-量子混合算法 · Barren Plateau<br>
+        <b>应用：</b>药物分子设计 · 材料科学 · 量子化学模拟<br>
+        <b>对应课程：</b>量子计算导论 第8章 · 变分量子算法
+      </div>
+    </details>
+    <div class="vh">分子与参数配置</div>
+    <div style="font-size:11px;color:var(--t5);font-family:var(--mono);margin-bottom:8px;">选择哈密顿量</div>
+    <div class="mgrid">
+      <div class="mb on" onclick="selMol(this,'H2')"><div class="mf">H₂</div><div class="ms">2 qubits</div></div>
+      <div class="mb" onclick="selMol(this,'HeH')"><div class="mf">HeH⁺</div><div class="ms">2 qubits</div></div>
+      <div class="mb" onclick="selMol(this,'LiH')"><div class="mf">LiH</div><div class="ms">4 qubits</div></div>
+      <div class="mb" onclick="selMol(this,'BeH2')"><div class="mf">BeH₂</div><div class="ms">6 qubits</div></div>
+      <div class="mb" onclick="selMol(this,'H2O')"><div class="mf">H₂O</div><div class="ms">8 qubits</div></div>
+    </div>
+    <div style="font-size:11px;color:var(--t5);font-family:var(--mono);margin-bottom:8px;">优化器参数</div>
+    <div class="frow">
+      <label id="vqe-lbl-opt">优化器</label>
+      <select id="vqe-sel-opt" style="flex:1;font-size:12px;font-family:var(--mono);padding:3px 6px;border:1px solid var(--b1);border-radius:4px;background:var(--white);color:var(--t9);">
+        <option>COBYLA</option><option>SPSA</option><option>L-BFGS-B</option>
+      </select>
+    </div>
+    <div class="frow">
+      <label id="vqe-lbl-iter">最大迭代</label>
+      <input id="vqe-inp-iter" type="range" min="20" max="200" value="80" step="1" oninput="this.nextElementSibling.textContent=this.value">
+      <span class="fval">80</span>
+    </div>
+    <div class="frow">
+      <label id="vqe-lbl-depth">Ansatz 深度</label>
+      <input id="vqe-inp-depth" type="range" min="1" max="5" value="2" step="1" oninput="this.nextElementSibling.textContent=this.value;window.refreshVQEAnsatzLabel&&refreshVQEAnsatzLabel()">
+      <span class="fval">2</span>
+    </div>
+    <div class="frow">
+      <label id="vqe-lbl-type">Ansatz 类型</label>
+      <select id="vqe-sel-type" style="flex:1;font-size:12px;font-family:var(--mono);padding:3px 6px;border:1px solid var(--b1);border-radius:4px;background:var(--white);color:var(--t9);">
+        <option>Hardware-Efficient</option><option>UCCSD</option><option>RealAmplitudes</option>
+      </select>
+    </div>
+    <div class="ecard">
+      <div class="emain" id="ve-val">—</div>
+      <div class="eunit">当前能量（Hartree）</div>
+      <div class="erow">
+        <span class="eexact" id="ve-exact">精确值: -1.1372</span>
+        <span class="eerr" id="ve-err">误差: —</span>
+      </div>
+    </div>
+    <button class="vrun" id="vrun-btn" onclick="startVQE()">▶ 开始 VQE 优化</button>
+    <button class="vrun" style="background:var(--teal);margin-top:6px" onclick="generateVQEReport()">📄 生成实验报告</button>
+    <div class="ilog" id="vlog"></div>
+  </div>
+
+  <div class="vqecol" id="vqecol-2">
+    <div class="vh" id="vqe-col2-hd">能量景观 &amp; 收敛曲线</div>
+
+    <!-- ── 3D Energy Landscape (primary visual) ── -->
+    <div id="vqe3d-wrap">
+      <canvas id="vqe3dcv"></canvas>
+      <div id="vqe3d-status">等待运行...</div>
+      <div id="vqe3d-hint">θ₁/θ₂ 切片 · 拖拽旋转 · 滚轮缩放</div>
+    </div>
+
+    <!-- ── Stats row ── -->
+    <div class="vstg">
+      <div class="vsc"><div class="sv" id="v-iter">0</div><div class="sl">迭代次数</div></div>
+      <div class="vsc"><div class="sv" id="v-status" style="font-size:12px">待开始</div><div class="sl">状态</div></div>
+      <div class="vsc"><div class="sv" id="v-acc">—</div><div class="sl">误差率</div></div>
+    </div>
+
+    <!-- ── 2D Convergence curve (secondary) ── -->
+    <canvas id="vqecv" style="height:140px;"></canvas>
+    <div id="bwarn" class="bwarn">⚠ 检测到梯度消失（Barren Plateau）：梯度方差 &lt; 10⁻⁴，优化可能停滞。建议调整 Ansatz 结构或降低电路深度。</div>
+  </div>
+
+  <div class="vqecol" id="vqecol-3">
+    <div class="vh">Ansatz 线路与梯度</div>
+    <div style="font-size:12px;color:var(--t5);font-family:var(--mono);margin-bottom:6px;">Hardware-Efficient Ansatz（2层）</div>
+    <div class="ansb">
+q₀ ──<span style="color:var(--navy)">Ry(θ₁)</span>──●──────────<span style="color:var(--purple)">Rz(θ₄)</span>──<br>
+q₁ ──<span style="color:var(--navy)">Ry(θ₂)</span>──⊕──<span style="color:var(--navy)">Ry(θ₃)</span>──●──────<br>
+    </div>
+    <div style="font-size:12px;color:var(--t5);font-family:var(--mono);margin:10px 0 5px;">参数梯度 ∂E/∂θᵢ</div>
+    <table class="gtbl" id="gtbl">
+      <tr><td>∂E/∂θ₁</td><td id="g1">—</td></tr>
+      <tr><td>∂E/∂θ₂</td><td id="g2">—</td></tr>
+      <tr><td>∂E/∂θ₃</td><td id="g3">—</td></tr>
+      <tr><td>∂E/∂θ₄</td><td id="g4">—</td></tr>
+    </table>
+    <div class="exprow">
+      <button class="expb eqk" onclick="openModal()">Qiskit 代码</button>
+      <button class="expb emq" onclick="openModal()">MindQuantum</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ QAOA VIEW ══ -->
+<div id="qv" style="display:none" data-mpanel="1">
+  <div class="rz rz-col" id="rz-qv-l"><div class="rz-pip"></div></div>
+  <div class="rz rz-col" id="rz-qv-r"><div class="rz-pip"></div></div>
+  <!-- Left: Graph Editor -->
+  <div class="qaoa-col" id="qaoa-col-1">
+    <details class="edu-bg-panel" style="margin-bottom:10px;border:1px solid var(--b1);border-radius:6px;padding:8px 12px;background:var(--surf)" open>
+      <summary style="cursor:pointer;font-size:12px;font-weight:600;color:var(--navy);list-style:none;user-select:none">
+        📘 实验背景与知识点 <span class="edu-bg-hint" style="font-size:11px;color:var(--t5);font-weight:400"></span>
+      </summary>
+      <div style="font-size:12px;color:var(--t7);line-height:1.85;margin-top:8px;font-family:var(--mono)">
+        这是一个图分组优化问题，类似于把一群人分成两组，让组间相互认识的人最多。<br>
+        <b>QAOA（量子近似优化算法）</b>将组合优化问题映射到量子哈密顿量，利用量子叠加寻找近似最优解。<br>
+        <b>核心思想：</b>|ψ(γ,β)⟩ = e^{-iβB} e^{-iγC} |+⟩^⊗n，通过优化γ和β参数最大化目标函数期望值。<br>
+        <b>知识点：</b>组合优化 · Max-Cut问题 · 量子近似 · 近似比 · 量子-经典混合优化<br>
+        <b>应用：</b>物流调度 · 金融投资组合优化 · 芯片布局设计<br>
+        <b>对应课程：</b>量子计算导论 第9章 · 量子优化算法
+      </div>
+    </details>
+    <div class="qh">图结构编辑器 <span style="font-size:12px;color:var(--t5);font-weight:400">Max-Cut 问题</span></div>
+    <div style="font-size:11px;color:var(--t5);font-family:var(--mono);margin-bottom:5px">节点模式：单击空白添加 / 双击节点删除 &nbsp;·&nbsp; 连边模式：点击两节点连边 / 再次点击同对删边 / 点击边删边</div>
+    <canvas id="qaoa-graph-cv" height="220"></canvas>
+    <div class="qaoa-graph-ctrl">
+      <button class="qgbtn active" id="qg-mode-node" onclick="setQAOAMode('node',this)">＋ 节点</button>
+      <button class="qgbtn" id="qg-mode-edge" onclick="setQAOAMode('edge',this)">─ 连边</button>
+      <button class="qgbtn" onclick="clearQAOAGraph()">清空</button>
+      <button class="qgbtn" onclick="initQAOADefault()">示例图</button>
+    </div>
+    <!-- Edge management panel -->
+    <div class="qaoa-ep" id="qaoa-ep">
+      <div class="qaoa-ep-toolbar">
+        <span class="qaoa-ep-lbl">添加边</span>
+        <select id="qaoa-ep-from" class="qaoa-ep-sel"><option>—</option></select>
+        <span class="qaoa-ep-dash">—</span>
+        <select id="qaoa-ep-to" class="qaoa-ep-sel"><option>—</option></select>
+        <button class="qgbtn" onclick="qaoaAddEdgePanel()">+ 连边</button>
+        <button class="qgbtn qaoa-del-node-btn" id="qaoa-del-node-btn" style="display:none" onclick="qaoaDelSelNode()">✕ 删节点</button>
+      </div>
+      <div class="qaoa-ep-edges" id="qaoa-ep-edges">
+        <span class="qaoa-ep-empty">暂无边，请在画布连边或用上方选择器添加</span>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--t5);font-family:var(--mono);margin:6px 0 4px">Max-Cut 问题：将节点分为两组，使组间边最多</div>
+    <div class="qaoa-info" id="qaoa-graph-info">节点: 0 &nbsp;|&nbsp; 边: 0 &nbsp;|&nbsp; 最优割: —</div>
+    <div style="margin-top:10px;font-size:11px;color:var(--t5);font-family:var(--mono);margin-bottom:5px">QAOA 参数</div>
+    <div class="frow">
+      <label id="qaoa-lbl-p">p 层数（当前仅支持 p=1）</label>
+      <input type="range" min="1" max="1" value="1" step="1" id="qaoa-p" disabled>
+      <span class="fval">1</span>
+    </div>
+    <div class="frow">
+      <label id="qaoa-lbl-gamma">最优 γ（结果）</label>
+      <input type="range" min="0" max="180" value="45" step="1" id="qaoa-gamma" disabled>
+      <span class="fval">45°</span>
+    </div>
+    <div class="frow">
+      <label id="qaoa-lbl-beta">最优 β（结果）</label>
+      <input type="range" min="0" max="90" value="30" step="1" id="qaoa-beta" disabled>
+      <span class="fval">30°</span>
+    </div>
+    <button class="qrun" id="qaoa-run-btn" onclick="startQAOA()">▶ 开始 QAOA 优化</button>
+    <button class="qrun" style="background:var(--teal);margin-top:6px" onclick="generateQAOAReport()">📄 生成实验报告</button>
+  </div>
+  <!-- Middle: Convergence Chart -->
+  <div class="qaoa-col" id="qaoa-col-2">
+    <div class="qh">近似比收敛曲线</div>
+    <div class="qaoa-vstg">
+      <div class="qaoa-sc"><div class="sv" id="qaoa-iter">0</div><div class="sl">迭代次数</div></div>
+      <div class="qaoa-sc"><div class="sv" id="qaoa-ratio">—</div><div class="sl">近似比 r</div></div>
+      <div class="qaoa-sc"><div class="sv" id="qaoa-cut">—</div><div class="sl">当前割值</div></div>
+    </div>
+    <canvas id="qaoa-chart-cv" style="height:200px;display:block;width:100%"></canvas>
+    <div class="qaoa-legend">
+      <span><i style="background:#276749"></i>最优 r=1.0</span>
+      <span><i style="background:#1B3A6B"></i>QAOA 收敛曲线</span>
+    </div>
+    <div style="margin-top:12px;font-size:11px;color:var(--t5);font-family:var(--mono);margin-bottom:5px">理论基础</div>
+    <div class="qaoa-info" style="line-height:1.85">
+      QAOA p=1 Ansatz：<br>
+      |ψ(γ,β)⟩ = e<sup>-iβB</sup> e<sup>-iγC</sup> |+⟩<sup>⊗n</sup><br>
+      C = Σ<sub>(ij)∈E</sub> (I−Z<sub>i</sub>Z<sub>j</sub>)/2 &nbsp; B = Σ<sub>i</sub> X<sub>i</sub>
+    </div>
+  </div>
+  <!-- Right: Measurement Results -->
+  <div class="qaoa-col" id="qaoa-col-3">
+    <div class="qh">测量结果分布</div>
+    <div style="font-size:11px;color:var(--t5);font-family:var(--mono);margin-bottom:6px">绿色柱 = 最优割方案，高度 = 测量概率</div>
+    <canvas id="qaoa-prob-cv" style="height:200px;display:block;width:100%;cursor:pointer" onclick="openQAOAProbZoom()" title="点击放大查看"></canvas>
+    <div class="qaoa-prob-hint">🔍 点击图表可放大查看</div>
+    <div id="qaoa-solution-title" style="margin-top:10px;font-size:11px;font-family:var(--mono);color:var(--t5);margin-bottom:5px">最优解可视化</div>
+    <div class="qaoa-info" id="qaoa-solution">
+      运行 QAOA 后显示最优割方案。<br>
+      绿色节点 = 集合 S &nbsp; 蓝色节点 = 集合 S̄
+    </div>
+    <div style="margin-top:10px">
+      <div id="qaoa-circuit-title" style="font-size:11px;color:var(--t5);font-family:var(--mono);margin-bottom:5px">对应量子线路（p=1）</div>
+      <div class="ansb" id="qaoa-circuit-display" style="font-size:12px;line-height:1.9">
+        等待图构建...
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ALGORITHM LIBRARY ══ -->
+<div id="lv" style="display:none">
+  <div class="algo-page-hd">
+    <div class="algo-page-title">线路模板</div>
+    <div class="algo-page-sub">预置经典量子线路 · 点击一键加载到编辑器</div>
+  </div>
+  <div class="algo-grid" id="algo-grid"></div>
+</div>
+
+<!-- ══ MICRO VIDEO CENTER ══ -->
+<div id="microv" style="display:none"></div>
+
+<!-- ══ 学习资料库（内容由 resourcelib.js 从 manifest 渲染）══ -->
+<div id="resv" style="display:none" aria-label="学习资料库"></div>
+
+<!-- ══ SHARE MODAL ══ -->
+<div class="share-modal" id="share-modal" onclick="if(event.target===this)closeShareModal()">
+  <div class="share-box">
+    <div class="share-hd">
+      <span class="share-title">⇗ 分享线路</span>
+      <span onclick="closeShareModal()" style="cursor:pointer;color:var(--t3);font-size:18px">✕</span>
+    </div>
+    <div class="share-body">
+      <div class="share-note">将下方链接发送给他人，对方打开即可直接加载此量子线路。链接包含完整线路数据，无需后端支持。</div>
+      <div class="share-url-row">
+        <input class="share-url-inp" id="share-url-input" readonly placeholder="链接生成中...">
+        <button class="share-copy-btn" onclick="copyShareUrl()">复制链接</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Code Modal -->
+<div class="mbg" id="mbg" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="mhd"><span class="mhd-title">代码生成器</span> <span class="mcls" onclick="closeModal()">✕</span></div>
+    <div class="mtbar">
+      <div class="mt on" onclick="switchTab('qiskit',this)">Qiskit</div>
+      <div class="mt" onclick="switchTab('mind',this)">MindQuantum</div>
+    </div>
+    <div class="carea" id="carea"></div>
+    <div class="mft"><button class="cpybtn" onclick="copyCode(event)">复制代码</button></div>
+  </div>
+</div>
+
+<!-- Drag Ghost -->
+<div id="dg"></div>
+
+<!-- Status Bar -->
+<div id="sb" class="aq-statusbar">
+  <div class="sbi"><div class="sbd sg"></div>FastAPI 后端</div>
+  <div class="sbi"><div class="sbd sb2"></div>AerSimulator</div>
+  <div class="sbi"><div class="sbd sy"></div>DeepSeek Agent</div>
+
+  <div id="sbm">就绪</div>
+</div>
+
+<!-- ══ THEME PICKER (first visit) ══ -->
+<div class="tp-overlay" id="tp-overlay">
+  <div class="tp-box">
+    <div class="tp-hd">
+      <span class="tp-hd-icon">✦</span>
+      <div class="tp-hd-title">选择你的界面主题</div>
+      <div class="tp-hd-sub">沉浸感从第一眼开始，你可以随时在设置中更改</div>
+    </div>
+    <div class="tp-body">
+      <div class="tp-hint">点击选择，实时预览效果</div>
+      <div class="tp-cards">
+        <!-- 经典学院 -->
+        <div class="tp-card on" data-th="classic" onclick="pickTheme('classic')">
+          <div class="tp-card-prev" style="background:#EFF1F5">
+            <div class="tp-card-bar" style="background:#1B3A6B"></div>
+            <div class="tp-card-body">
+              <div class="tp-card-sb" style="background:#F7F8FB;border:1px solid #DDE1E8"></div>
+              <div class="tp-card-cn" style="background:#FFFFFF;border:1px solid #DDE1E8"></div>
+              <div class="tp-card-rp" style="background:#F7F8FB;border:1px solid #DDE1E8"></div>
+            </div>
+          </div>
+          <div class="tp-card-info">
+            <div class="tp-card-name">经典学院</div>
+            <div class="tp-card-desc">明亮 · 专业海军蓝</div>
+          </div>
+        </div>
+        <!-- 梦幻紫 -->
+        <div class="tp-card" data-th="dark" onclick="pickTheme('dark')">
+          <div class="tp-card-prev" style="background:#F2EEFF">
+            <div class="tp-card-bar" style="background:linear-gradient(130deg,#1A0840,#5A18C8)"></div>
+            <div class="tp-card-body">
+              <div class="tp-card-sb" style="background:#FAF7FF;border:1px solid #D9CCFF"></div>
+              <div class="tp-card-cn" style="background:#FFFFFF;border:1px solid #D9CCFF"></div>
+              <div class="tp-card-rp" style="background:#FAF7FF;border:1px solid #D9CCFF"></div>
+            </div>
+          </div>
+          <div class="tp-card-info">
+            <div class="tp-card-name">梦幻紫</div>
+            <div class="tp-card-desc">明亮 · 紫粉渐变</div>
+          </div>
+        </div>
+        <!-- 量子青 -->
+        <div class="tp-card" data-th="aurora" onclick="pickTheme('aurora')">
+          <div class="tp-card-prev" style="background:#EBF8FF">
+            <div class="tp-card-bar" style="background:linear-gradient(130deg,#062840,#1068B8)"></div>
+            <div class="tp-card-body">
+              <div class="tp-card-sb" style="background:#F0FAFF;border:1px solid #BAE0FF"></div>
+              <div class="tp-card-cn" style="background:#FFFFFF;border:1px solid #BAE0FF"></div>
+              <div class="tp-card-rp" style="background:#F0FAFF;border:1px solid #BAE0FF"></div>
+            </div>
+          </div>
+          <div class="tp-card-info">
+            <div class="tp-card-name">量子青</div>
+            <div class="tp-card-desc">明亮 · 青蓝渐变</div>
+          </div>
+        </div>
+        <!-- 暗金控制台 -->
+        <div class="tp-card" data-th="amber" onclick="pickTheme('amber')">
+          <div class="tp-card-prev" style="background:#0f1116">
+            <div class="tp-card-bar" style="background:linear-gradient(130deg,#0b0c10,#2d1f0a)"></div>
+            <div class="tp-card-body">
+              <div class="tp-card-sb" style="background:#13151b;border:1px solid rgba(255,176,92,.28)"></div>
+              <div class="tp-card-cn" style="background:#181b23;border:1px solid rgba(255,176,92,.28)"></div>
+              <div class="tp-card-rp" style="background:#1d2028;border:1px solid rgba(255,176,92,.28)"></div>
+            </div>
+          </div>
+          <div class="tp-card-info">
+            <div class="tp-card-name">暗金控制台</div>
+            <div class="tp-card-desc">暗色 · 琥珀金</div>
+          </div>
+        </div>
+        <div class="tp-card" data-th="space" onclick="pickTheme('space')">
+          <div class="tp-card-prev" style="background:#0a0e1a">
+            <div class="tp-card-bar" style="background:linear-gradient(130deg,#06080f,#141a2e)"></div>
+            <div class="tp-card-body">
+              <div class="tp-card-sb" style="background:#0f1422;border:1px solid rgba(0,212,255,.28)"></div>
+              <div class="tp-card-cn" style="background:#141a2e;border:1px solid rgba(0,212,255,.28)"></div>
+              <div class="tp-card-rp" style="background:#0f1422;border:1px solid rgba(0,212,255,.28)"></div>
+            </div>
+          </div>
+          <div class="tp-card-info">
+            <div class="tp-card-name">深空量子</div>
+            <div class="tp-card-desc">暗色 · 量子青蓝</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tp-foot">
+      <button class="tp-confirm" onclick="confirmThemePick()">确认选择，开始探索 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SETTINGS MODAL ══ -->
+<div class="settings-overlay" id="settings-overlay" onclick="if(event.target===this)closeSettings()">
+  <div class="settings-box">
+    <!-- Header -->
+    <div class="settings-hd">
+      <div class="settings-hd-title">
+        <div class="settings-hd-icon">⚙</div>
+        <span data-i18n="hbtn.settings">设置</span>
+      </div>
+      <button class="settings-hd-close" onclick="closeSettings()">✕</button>
+    </div>
+
+    <div class="settings-body">
+
+      <!-- ── 外观主题 ── -->
+      <div class="settings-sec">
+        <div class="settings-sec-hd">
+          <div class="settings-sec-icon blue">🎨</div>
+          <div class="settings-sec-label" data-i18n="set.theme">外观主题</div>
+        </div>
+        <div class="th-cards">
+          <div class="th-card on" data-th="classic" onclick="applyTheme('classic')">
+            <div class="th-prev" style="background:#EFF1F5">
+              <div class="th-prev-bar" style="background:#1B3A6B"></div>
+              <div class="th-prev-body">
+                <div class="th-prev-sb" style="background:#F7F8FB;border:1px solid #DDE1E8"></div>
+                <div class="th-prev-cn" style="background:#FFFFFF;border:1px solid #DDE1E8"></div>
+                <div class="th-prev-rp" style="background:#F7F8FB;border:1px solid #DDE1E8"></div>
+              </div>
+            </div>
+            <div class="th-info">
+              <div class="th-name" data-i18n="th.classic.name">经典学院</div>
+              <div class="th-desc" data-i18n="th.classic.desc">明亮 · 海军蓝</div>
+            </div>
+          </div>
+          <div class="th-card" data-th="dark" onclick="applyTheme('dark')">
+            <div class="th-prev" style="background:#F2EEFF">
+              <div class="th-prev-bar" style="background:linear-gradient(130deg,#1A0840,#5A18C8)"></div>
+              <div class="th-prev-body">
+                <div class="th-prev-sb" style="background:#FAF7FF;border:1px solid #D9CCFF"></div>
+                <div class="th-prev-cn" style="background:#FFFFFF;border:1px solid #D9CCFF"></div>
+                <div class="th-prev-rp" style="background:#FAF7FF;border:1px solid #D9CCFF"></div>
+              </div>
+            </div>
+            <div class="th-info">
+              <div class="th-name" data-i18n="th.dark.name">梦幻紫</div>
+              <div class="th-desc" data-i18n="th.dark.desc">明亮 · 紫粉</div>
+            </div>
+          </div>
+          <div class="th-card" data-th="aurora" onclick="applyTheme('aurora')">
+            <div class="th-prev" style="background:#EBF8FF">
+              <div class="th-prev-bar" style="background:linear-gradient(130deg,#062840,#1068B8)"></div>
+              <div class="th-prev-body">
+                <div class="th-prev-sb" style="background:#F0FAFF;border:1px solid #BAE0FF"></div>
+                <div class="th-prev-cn" style="background:#FFFFFF;border:1px solid #BAE0FF"></div>
+                <div class="th-prev-rp" style="background:#F0FAFF;border:1px solid #BAE0FF"></div>
+              </div>
+            </div>
+            <div class="th-info">
+              <div class="th-name" data-i18n="th.aurora.name">量子青</div>
+              <div class="th-desc" data-i18n="th.aurora.desc">明亮 · 青蓝</div>
+            </div>
+          </div>
+          <div class="th-card" data-th="amber" onclick="applyTheme('amber')">
+            <div class="th-prev" style="background:#0f1116">
+              <div class="th-prev-bar" style="background:linear-gradient(130deg,#0b0c10,#2d1f0a)"></div>
+              <div class="th-prev-body">
+                <div class="th-prev-sb" style="background:#13151b;border:1px solid rgba(255,176,92,.28)"></div>
+                <div class="th-prev-cn" style="background:#181b23;border:1px solid rgba(255,176,92,.28)"></div>
+                <div class="th-prev-rp" style="background:#1d2028;border:1px solid rgba(255,176,92,.28)"></div>
+              </div>
+            </div>
+            <div class="th-info">
+              <div class="th-name" data-i18n="th.amber.name">暗金控制台</div>
+              <div class="th-desc" data-i18n="th.amber.desc">暗色 · 琥珀金</div>
+            </div>
+          </div>
+          <div class="th-card" data-th="space" onclick="applyTheme('space')">
+            <div class="th-prev" style="background:#0a0e1a">
+              <div class="th-prev-bar" style="background:linear-gradient(130deg,#06080f,#141a2e)"></div>
+              <div class="th-prev-body">
+                <div class="th-prev-sb" style="background:#0f1422;border:1px solid rgba(0,212,255,.28)"></div>
+                <div class="th-prev-cn" style="background:#141a2e;border:1px solid rgba(0,212,255,.28)"></div>
+                <div class="th-prev-rp" style="background:#0f1422;border:1px solid rgba(0,212,255,.28)"></div>
+              </div>
+            </div>
+            <div class="th-info">
+              <div class="th-name" data-i18n="th.space.name">深空量子</div>
+              <div class="th-desc" data-i18n="th.space.desc">暗色 · 量子青蓝</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 语言 ── -->
+      <div class="settings-divider"></div>
+      <div class="settings-sec">
+        <div class="settings-sec-hd">
+          <div class="settings-sec-icon purple">🌐</div>
+          <div class="settings-sec-label" data-i18n="set.lang">语言 · Language</div>
+        </div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-row-lbl" data-i18n="set.lang.label">界面语言</div>
+            <div class="settings-row-sub" data-i18n="set.lang.sub">切换后立即生效</div>
+          </div>
+          <div class="seg-ctrl">
+            <div class="seg-btn on" id="lang-zh" onclick="applyLang('zh')">中文</div>
+            <div class="seg-btn" id="lang-en" onclick="applyLang('en')">English</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 文字与显示 ── -->
+      <div class="settings-divider"></div>
+      <div class="settings-sec">
+        <div class="settings-sec-hd">
+          <div class="settings-sec-icon teal">Aa</div>
+          <div class="settings-sec-label" data-i18n="set.display">文字与显示</div>
+        </div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-row-lbl" data-i18n="set.fontsize">字体大小</div>
+            <div class="settings-row-sub" data-i18n="set.fontsize.sub">影响全局文字尺寸</div>
+          </div>
+          <div class="seg-ctrl">
+            <div class="seg-btn" id="fs-sm" onclick="applyFontSize('sm')" data-i18n="fs.sm">小</div>
+            <div class="seg-btn on" id="fs-md" onclick="applyFontSize('md')" data-i18n="fs.md">默认</div>
+            <div class="seg-btn" id="fs-lg" onclick="applyFontSize('lg')" data-i18n="fs.lg">大</div>
+          </div>
+        </div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-row-lbl" data-i18n="set.zoom">页面缩放</div>
+            <div class="settings-row-sub" data-i18n="set.zoom.sub">整体界面缩放比例</div>
+          </div>
+          <div class="zoom-row">
+            <button class="zoom-step-btn" onclick="stepZoom(-5)">−</button>
+            <input type="range" class="zoom-slider" min="70" max="130" step="5" value="100" id="zoom-slider" oninput="applyZoom(parseInt(this.value))">
+            <span class="zoom-badge" id="zoom-val">100%</span>
+            <button class="zoom-step-btn" onclick="stepZoom(5)">+</button>
+          </div>
+        </div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-row-lbl" data-i18n="set.anim">过渡动画</div>
+            <div class="settings-row-sub" data-i18n="set.anim.sub">关闭可提高低端设备性能</div>
+          </div>
+          <div class="tog-switch on" id="anim-tog" onclick="toggleAnimations(this)"></div>
+        </div>
+      </div>
+
+      <!-- ── 操作 ── -->
+      <div class="settings-divider"></div>
+      <div class="settings-sec">
+        <div class="settings-sec-hd">
+          <div class="settings-sec-icon amber">⚡</div>
+          <div class="settings-sec-label" data-i18n="set.actions">操作</div>
+        </div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-row-lbl" data-i18n="set.resetlayout">重置面板布局</div>
+            <div class="settings-row-sub" data-i18n="set.resetlayout.sub">恢复默认侧边栏宽度与底部高度</div>
+          </div>
+          <button class="settings-action-btn" onclick="resetLayout()" data-i18n="set.resetlayout.btn">重置</button>
+        </div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-row-lbl" data-i18n="set.cleardata">清除所有本地数据</div>
+            <div class="settings-row-sub" data-i18n="set.cleardata.sub">删除账号、线路、历史记录和全部设置</div>
+          </div>
+          <button class="settings-action-btn danger" onclick="clearAllData()" data-i18n="set.cleardata.btn">清除</button>
+        </div>
+      </div>
+
+      <!-- ── 关于 ── -->
+      <div class="settings-divider"></div>
+      <div class="settings-about">
+        <div class="settings-about-name">Q-Edu</div>
+        <div><span class="settings-about-ver">v 2.0</span></div>
+        <div class="settings-about-line">
+          <span data-i18n="set.about.tech">量子态向量模拟器 · 纯前端 · 无需服务器</span><br>
+          <span data-i18n="set.about.copy">© 2025 Q-Edu Project · 仅供教学使用</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ INTRO / PREFACE ══ -->
+<div class="intro-overlay" id="intro-overlay">
+  <div class="intro-box">
+
+    <!-- Hero 区 -->
+    <div class="intro-hero">
+      <div class="intro-hero-tag"><div class="intro-hero-tag-dot"></div>QUANTUM EDUCATION PLATFORM</div>
+      <div class="intro-title">用交互实验，<em>理解量子计算</em></div>
+      <div class="intro-sub">量子力学不再只存在于教科书——在这里，你可以亲手搭建量子线路、观察量子态演化，像真正的量子工程师一样做实验。</div>
+      <!-- 装饰性 SVG 轨道 -->
+      <svg class="intro-orbs" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="50" stroke="white" stroke-width="1"/>
+        <ellipse cx="60" cy="60" rx="50" ry="20" stroke="white" stroke-width="1" transform="rotate(60 60 60)"/>
+        <ellipse cx="60" cy="60" rx="50" ry="20" stroke="white" stroke-width="1" transform="rotate(-60 60 60)"/>
+        <circle cx="60" cy="10" r="4" fill="white"/>
+        <circle cx="103" cy="72" r="3" fill="white" opacity=".6"/>
+        <circle cx="17" cy="72" r="3" fill="white" opacity=".6"/>
+        <circle cx="60" cy="60" r="7" fill="white" opacity=".9"/>
+      </svg>
+    </div>
+
+    <!-- 正文 -->
+    <div class="intro-body">
+
+      <div class="intro-section-title" id="intro-what-title">什么是量子计算</div>
+      <div class="intro-what">
+        经典计算机用比特（0 或 1）处理信息；量子计算机的基本单元是<strong>量子比特（qubit）</strong>——它可以同时处于 0 和 1 的<strong>叠加态</strong>，并通过<strong>量子纠缠</strong>在多个比特之间建立关联。这两种性质让量子计算在密码破解、分子模拟、组合优化等领域展现出经典计算机无法比拟的加速潜力。IBM、Google、华为等顶尖科技公司都在加速布局量子硬件与软件生态。
+      </div>
+
+      <div class="intro-section-title" id="intro-do-title" style="margin-top:4px">本平台能帮你做什么</div>
+      <div class="intro-features">
+
+        <div class="intro-feat intro-feat-highlight">
+          <div class="intro-feat-icon">📚</div>
+          <div class="intro-feat-name">课程模式</div>
+          <div class="intro-feat-desc">结构化学习路径：前测 → 3 个引导实验 → 后测 → 学习证书，全程 AI 引导</div>
+        </div>
+        <div class="intro-feat">
+          <div class="intro-feat-icon">🔬</div>
+          <div class="intro-feat-name">量子线路编辑器</div>
+          <div class="intro-feat-desc">拖拽量子门自由搭建线路，支持最多 8 量子比特，逐步演化 & 回放</div>
+        </div>
+        <div class="intro-feat">
+          <div class="intro-feat-icon">🌐</div>
+          <div class="intro-feat-name">Bloch 球实时可视化</div>
+          <div class="intro-feat-desc">每放置一个门即时更新三维 Bloch 球，直观感受叠加、相位与纠缠</div>
+        </div>
+
+        <div class="intro-feat">
+          <div class="intro-feat-icon">⚛️</div>
+          <div class="intro-feat-name">VQE 变分量子算法</div>
+          <div class="intro-feat-desc">模拟 H₂、LiH 等分子基态能量，体验量子化学与变分优化前沿方法</div>
+        </div>
+        <div class="intro-feat">
+          <div class="intro-feat-icon">🔀</div>
+          <div class="intro-feat-name">QAOA 量子优化</div>
+          <div class="intro-feat-desc">交互式图编辑，求解 Max-Cut 组合优化问题，感受量子计算加速优势</div>
+        </div>
+        <div class="intro-feat">
+          <div class="intro-feat-icon">🎬</div>
+          <div class="intro-feat-name">微课中心</div>
+          <div class="intro-feat-desc">10 节精品视频讲解，基础 → 中级 → 高级，配合实验系统学习</div>
+        </div>
+
+        <div class="intro-feat">
+          <div class="intro-feat-icon">🤖</div>
+          <div class="intro-feat-name">AI 量子导师</div>
+          <div class="intro-feat-desc">放置量子门后自动讲解物理含义，随时提问，主动引导实验方向</div>
+        </div>
+        <div class="intro-feat">
+          <div class="intro-feat-icon">📝</div>
+          <div class="intro-feat-name">知识点自测</div>
+          <div class="intro-feat-desc">情景化弹出测验，即时反馈与评分，覆盖线路编辑、VQE、QAOA 等模块</div>
+        </div>
+        <div class="intro-feat">
+          <div class="intro-feat-icon">📤</div>
+          <div class="intro-feat-name">代码导出 & 实验报告</div>
+          <div class="intro-feat-desc">一键导出 Qiskit / MindQuantum 代码，自动生成含仿真结果的 PDF 报告</div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 底部操作栏 -->
+    <div class="intro-footer">
+      <div class="intro-skip">
+        <input type="checkbox" id="intro-skip-cb" onchange="introSkipChange(this)">
+        <label for="intro-skip-cb">下次不再自动显示</label>
+      </div>
+      <div class="intro-cta">
+        <button class="intro-btn-sec" onclick="closeIntro(false)">直接进入</button>
+        <button class="intro-btn-pri" onclick="closeIntro(true)">开始探索，查看新手指南 →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ AUTH MODAL ══ -->
+<div class="auth-overlay" id="auth-overlay" onclick="if(event.target===this)closeAuthModal()">
+  <div class="auth-box">
+    <div class="auth-hd">
+      <div class="auth-logo">Q-Edu</div>
+      <div class="auth-sub">量子计算交互教学平台</div>
+    </div>
+    <div class="auth-tabs">
+      <div class="auth-tab on" data-tab="login" onclick="switchAuthTab('login')">登录</div>
+      <div class="auth-tab" data-tab="register" onclick="switchAuthTab('register')">注册新账号</div>
+    </div>
+    <div class="auth-body">
+      <!-- 登录面板 -->
+      <div class="auth-form-pane on" data-pane="login">
+        <div class="auth-err" id="auth-login-err"></div>
+        <div class="auth-field">
+          <label>用户名</label>
+          <input id="login-username" type="text" placeholder="请输入用户名" autocomplete="username" onkeydown="if(event.key==='Enter')doLogin()">
+        </div>
+        <div class="auth-field">
+          <label>密码</label>
+          <input id="login-password" type="password" placeholder="请输入密码" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+        </div>
+        <button class="auth-submit" onclick="doLogin()">登录</button>
+      </div>
+      <!-- 注册面板 -->
+      <div class="auth-form-pane" data-pane="register">
+        <div class="auth-err" id="auth-reg-err"></div>
+        <div class="auth-field">
+          <label>用户名</label>
+          <input id="reg-username" type="text" placeholder="2–20 个字符，支持中文" autocomplete="username">
+        </div>
+        <div class="auth-field">
+          <label>密码</label>
+          <input id="reg-password" type="password" placeholder="至少 4 个字符" autocomplete="new-password">
+        </div>
+        <div class="auth-field">
+          <label>邮箱（选填）</label>
+          <input id="reg-email" type="email" placeholder="可选">
+        </div>
+        <button class="auth-submit" onclick="doRegister()">注册账号</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SAVE CIRCUIT MODAL ══ -->
+<div class="save-overlay" id="save-overlay" onclick="if(event.target===this)closeSaveModal()">
+  <div class="save-box">
+    <div class="save-hd">保存量子线路</div>
+    <div class="save-body">
+      <div class="save-note">为当前线路起一个名字，方便日后查找与载入。</div>
+      <div class="auth-field">
+        <label>线路名称</label>
+        <input id="save-circuit-name" type="text" placeholder="输入线路名称" onkeydown="if(event.key==='Enter')confirmSaveCircuit()">
+      </div>
+    </div>
+    <div class="save-ft">
+      <button class="save-cancel" onclick="closeSaveModal()">取消</button>
+      <button class="save-confirm" onclick="confirmSaveCircuit()">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROFILE MODAL ══ -->
+<div class="profile-overlay" id="profile-overlay" onclick="if(event.target===this)closeProfile()">
+  <div class="profile-box">
+    <div class="profile-hd">
+      <div class="profile-hd-left">
+        <div class="profile-hd-title">个人中心</div>
+        <div class="profile-hd-sub" id="profile-username-display"></div>
+      </div>
+      <span style="cursor:pointer;color:rgba(255,255,255,.65);font-size:20px;line-height:1" onclick="closeProfile()">✕</span>
+    </div>
+    <div class="profile-tabs">
+      <div class="profile-tab on" data-tab="circuits" onclick="switchProfileTab('circuits')">📁 已保存线路</div>
+      <div class="profile-tab" data-tab="history" onclick="switchProfileTab('history')">📋 实验历史</div>
+    </div>
+    <div class="profile-content">
+      <div class="profile-pane on" data-pane="circuits" id="profile-circuits-list"></div>
+      <div class="profile-pane" data-pane="history" id="profile-history-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ BEGINNER GUIDE ══ -->
+<div id="guide-overlay" onclick="if(event.target===this)closeGuide()">
+  <div id="guide-box">
+    <div class="guide-hd">
+      <div class="guide-prog" id="guide-tabs"></div>
+    </div>
+    <div class="guide-body" id="guide-body"></div>
+    <div class="guide-ft">
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+        <div class="guide-dots" id="guide-dots"></div>
+        <label class="guide-no-show-lbl">
+          <input type="checkbox" id="guide-no-show-chk">
+          <span id="guide-no-show-txt">下次不再显示</span>
+        </label>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="guide-prev" onclick="guideGo(-1)">← 上一步</button>
+        <button class="guide-next" id="guide-next-btn" onclick="guideGo(1)">下一步 →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ALGORITHM PREVIEW MODAL ══ -->
+<div class="aprev-overlay" id="aprev-overlay" onclick="if(event.target===this)closeAlgoPreview()">
+  <video class="screen-bg-video" autoplay muted loop playsinline>
+    <source data-src="2592-粒子 尘埃 星云-4k超清商用素材-猫灵九天.mp4" type="video/mp4">
+  </video>
+  <div class="aprev-box">
+    <div class="aprev-hd">
+      <div class="aprev-hd-left">
+        <span class="aprev-hd-name" id="aprev-name"></span>
+        <span class="aprev-hd-zh" id="aprev-zh"></span>
+        <span class="diff-badge" id="aprev-diff"></span>
+      </div>
+      <button class="aprev-close" onclick="closeAlgoPreview()">✕</button>
+    </div>
+    <div class="aprev-body">
+      <div class="aprev-anim">
+        <canvas id="aprev-cv" width="360" height="240"></canvas>
+        <div class="aprev-anim-ctrl">
+          <button class="aprev-anim-btn active" id="aprev-play-btn" onclick="toggleAlgoAnim()">⏸ 暂停</button>
+          <button class="aprev-anim-btn" id="aprev-reset-btn" onclick="resetAlgoAnim()">↺ 重播</button>
+          <div class="aprev-spd-sep"></div>
+          <button class="aprev-anim-btn aprev-spd" id="aprev-spd-slow" onclick="setAlgoSpeed(0.5)">慢速</button>
+          <button class="aprev-anim-btn aprev-spd active" id="aprev-spd-norm" onclick="setAlgoSpeed(1)">正常</button>
+          <button class="aprev-anim-btn aprev-spd" id="aprev-spd-fast" onclick="setAlgoSpeed(2.5)">快速</button>
+        </div>
+      </div>
+      <div class="aprev-info">
+        <div>
+          <div class="aprev-info-lbl">算法简介</div>
+          <div class="aprev-info-sec" id="aprev-desc"></div>
+        </div>
+        <div>
+          <div class="aprev-info-lbl">执行步骤</div>
+          <div class="aprev-steps" id="aprev-steps"></div>
+        </div>
+        <div>
+          <div class="aprev-info-lbl">量子优势</div>
+          <div class="aprev-info-sec" id="aprev-adv"></div>
+        </div>
+      </div>
+    </div>
+    <div class="aprev-ft">
+      <button class="aprev-load-btn" id="aprev-load-btn">一键加载到编辑器 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ QAOA PROB ZOOM MODAL ══ -->
+<div id="qaoa-zoom-overlay" tabindex="-1" onclick="if(event.target===this)closeQAOAProbZoom()" onkeydown="if(event.key==='Escape')closeQAOAProbZoom()">
+  <div class="qaoa-zoom-box">
+    <div class="qaoa-zoom-hd">
+      <span class="qaoa-zoom-title">测量结果分布</span>
+      <div class="qaoa-zoom-close" onclick="closeQAOAProbZoom()">✕</div>
+    </div>
+    <div style="font-size:11px;color:var(--t5);font-family:var(--mono);margin-bottom:10px">绿色柱 = 最优割方案，高度 = 测量概率</div>
+    <canvas id="qaoa-zoom-cv"></canvas>
+  </div>
+</div>
+
+<!-- ══ BLOCH ZOOM MODAL ══ -->
+<div id="bloch-zoom-overlay" onclick="if(event.target===this)closeBlochZoom()">
+  <video class="screen-bg-video" autoplay muted loop playsinline>
+    <source data-src="2582-星系 穿梭 时空-4k超清商用素材-猫灵九天.mp4" type="video/mp4">
+  </video>
+  <div class="bloch-zoom-box" id="bloch-zoom-box">
+    <div class="bloch-zoom-hd">
+      <div class="bloch-zoom-nav">
+        <button class="bloch-zoom-nav-btn" onclick="blochZoomNav(-1)" title="上一个比特">‹</button>
+        <span class="bloch-zoom-qlbl" id="bloch-zoom-qlbl">q0</span>
+        <button class="bloch-zoom-nav-btn" onclick="blochZoomNav(1)" title="下一个比特">›</button>
+      </div>
+      <span class="bloch-zoom-hint">← → 切换 · ESC 关闭 · 拖动旋转</span>
+      <button class="bloch-zoom-close" onclick="closeBlochZoom()">✕</button>
+    </div>
+    <canvas id="bloch-zoom-cv"></canvas>
+    <div class="bloch-zoom-stats" id="bloch-zoom-stats"></div>
+  </div>
+</div>
+
+<div id="bloch-gallery-overlay" onclick="if(event.target===this)closeBlochGallery()">
+  <video class="screen-bg-video" autoplay muted loop playsinline>
+    <source data-src="2582-星系 穿梭 时空-4k超清商用素材-猫灵九天.mp4" type="video/mp4">
+  </video>
+  <div class="bloch-gallery-box" id="bloch-gallery-box">
+    <div class="bloch-gallery-hd">
+      <span class="bloch-gallery-title">Bloch Spheres</span>
+      <span class="bloch-gallery-hint">拖动各球独立旋转 · ESC 关闭</span>
+      <button class="bloch-zoom-close" onclick="closeBlochGallery()">✕</button>
+    </div>
+    <div id="bloch-gallery-grid" class="bloch-gallery-grid"></div>
+  </div>
+</div>
+
+<!-- Three.js for 3D Bloch sphere rendering (r148 = last version with UMD global build) -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.148.0/build/three.min.js"
+  onerror="console.error('[Q-Edu] Three.js CDN failed. Bloch spheres will use Canvas 2D fallback.')"></script>
+<!-- JS modules — order matters: state first, then dependencies, then main last -->
+<script src="canvas-utils.js?v=3"></script>
+<script src="state.js?v=3"></script>
+<script src="api.js?v=3"></script>
+<script src="bloch.js?v=3"></script>
+<script src="sim.js?v=3"></script>
+<script src="validator.js?v=1"></script>
+<script src="circuit.js?v=3"></script>
+<script src="vqe-landscape.js?v=4"></script>
+<script src="vqe.js?v=4"></script>
+<script src="qaoa.js?v=3"></script>
+<script src="algo.js?v=3"></script>
+<script src="ai.js?v=3"></script>
+<script src="codegen.js?v=3"></script>
+<script src="auth.js?v=3"></script>
+<script src="settings.js?v=4"></script>
+<script src="guide.js?v=4"></script>
+<script src="share.js?v=3"></script>
+<script src="replay.js?v=3"></script>
+<script src="step.js?v=1"></script>
+<script src="resize.js?v=3"></script>
+<script src="main.js?v=4"></script>
+
+<script src="home.js?v=2"></script>
+<script src="home-canvas.js?v=1"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="report.js?v=4"></script>
+<script src="quiz.js?v=1"></script>
+<!-- 知识点自测 overlay -->
+<div id="quiz-overlay"></div>
+<!-- 课程模式 overlays（样式由 course.js 注入）-->
+<div id="course-map-overlay"></div>
+<div id="course-exp-overlay"></div>
+<div id="course-test-overlay"></div>
+<script src="course.js?v=2"></script>
+<script src="microcenter.js?v=1"></script>
+<script>window.QEDU_RESOURCES_MANIFEST_URL = 'https://quansightnuaa.cn/manifest.json';</script>
+<script src="resourcelib.js?v=1"></script>
+<script src="touch.js?v=1"></script>
+<div id="dm-tooltip" style="display:none"></div>
+<!-- INLINE OVERRIDE: bypass cached sim.js for DM panel functions -->
+<script>
+// Inline canvas utility (in case canvas-utils.js is cached old)
+function _getCSSZoom(el) {
+  let zoom = 1, node = el;
+  while (node && node !== document.documentElement) {
+    const z = parseFloat(getComputedStyle(node).zoom);
+    if (z && !isNaN(z) && z > 0 && z !== 1) zoom *= z;
+    node = node.parentElement;
+  }
+  return zoom;
+}
+function setupHiDPICanvas(cv, logW, logH) {
+  const dpr = window.devicePixelRatio || 1;
+  const zoom = _getCSSZoom(cv);
+  const scale = dpr * zoom;
+  const pw = Math.round(logW * scale), ph = Math.round(logH * scale);
+  if (cv.width !== pw || cv.height !== ph) { cv.width = pw; cv.height = ph; }
+  cv.style.width = logW + 'px'; cv.style.height = logH + 'px';
+  const ctx = cv.getContext('2d');
+  ctx.setTransform(scale, 0, 0, scale, 0, 0);
+  return ctx;
+}
+
+// Override cached switchSpTab with DM rendering support
+function switchSpTab(tab, el) {
+  document.querySelectorAll('.sp-tab').forEach(t => t.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.sp-pane').forEach(p => p.classList.remove('on'));
+  document.getElementById('sp-' + tab).classList.add('on');
+  if (tab === 'dm') requestAnimationFrame(renderDensityMatrix);
+  if (tab === 'ent') requestAnimationFrame(renderEntanglement);
+}
+
+function _dmDefaultKeep(n) {
+  return Array.from({ length: Math.min(n, 3) }, (_, i) => i);
+}
+
+function renderDensityMatrix() {
+  try {
+    if (S.simSource === null && S.lastSim === null) {
+      ['dm-cv','dm-cv-im'].forEach(id => {
+        const cv = document.getElementById(id); if (!cv) return;
+        const ctx = setupHiDPICanvas(cv, 260, 36);
+        ctx.fillStyle = '#f1f5f9'; ctx.fillRect(0, 0, 260, 36);
+        ctx.fillStyle = '#334155'; ctx.font = '12px monospace'; ctx.textAlign = 'center';
+        ctx.fillText(window._currentLang === 'en' ? 'Click "Run Sim" to see results' : '请先点击"运行模拟"查看结果', 130, 22);
+      });
+      return;
+    }
+    const sim = simCircuit();
+    if (!sim) {
+      ['dm-cv','dm-cv-im'].forEach(id => {
+        const cv = document.getElementById(id); if (!cv) return;
+        const ctx = setupHiDPICanvas(cv, 220, 36);
+        ctx.fillStyle = '#f1f5f9'; ctx.fillRect(0, 0, 220, 36);
+        ctx.fillStyle = '#64748b'; ctx.font = '11px monospace'; ctx.textAlign = 'left';
+        ctx.fillText(window._currentLang === 'en' ? 'Qubit count > 8, cannot simulate' : '比特数超过8，无法模拟', 8, 22);
+      });
+      return;
+    }
+    if (window._dmKeepQubits) {
+      const valid = window._dmKeepQubits.filter(q => q < S.qubits);
+      window._dmKeepQubits = valid.length > 0 ? valid : null;
+    }
+    const keep = window._dmKeepQubits || _dmDefaultKeep(S.qubits);
+    const mat = sim.reducedDM(keep);
+    _drawDMCanvas('dm-cv', mat, false);
+    _drawDMCanvas('dm-cv-im', mat, true);
+    const note = document.getElementById('dm-note');
+    if (note) { note.style.display = 'block'; note.style.color = ''; }
+    renderDMQSelBar();
+    _initDMHover();
+  } catch(e) {
+    console.error('[DM]', e);
+    if (typeof setSBMsg === 'function') setSBMsg('DM Error: ' + e.message);
+    // Show error directly in DOM (no canvas dependency)
+    const note = document.getElementById('dm-note');
+    if (note) { note.style.display='block'; note.style.color='#dc2626'; note.textContent=(window._currentLang==='en'?'Error: ':'错误: ')+e.message; }
+  }
+}
+
+function renderDMQSelBar() {
+  const bar = document.getElementById('dm-qsel-bar'); if (!bar) return;
+  bar.innerHTML = '';
+  const keep = window._dmKeepQubits || _dmDefaultKeep(S.qubits);
+  for (let q = 0; q < S.qubits; q++) {
+    const btn = document.createElement('div');
+    const on = keep.includes(q);
+    btn.className = 'dm-qsb' + (on ? ' on' : '');
+    btn.textContent = 'q' + q;
+    btn.onclick = () => {
+      let k = [...(window._dmKeepQubits || _dmDefaultKeep(S.qubits))];
+      if (k.includes(q)) { if (k.length > 1) k = k.filter(x => x !== q); }
+      else { if (k.length < 4) { k.push(q); k.sort((a, b) => a - b); } }
+      window._dmKeepQubits = k;
+      renderDMQSelBar(); renderDensityMatrix();
+    };
+    bar.appendChild(btn);
+  }
+}
+
+function _drawDMCanvas(cvId, matrix, useIm) {
+  const cv = document.getElementById(cvId); if (!cv) return;
+  const { re, im, dim, keepQubits } = matrix;
+  const data = useIm ? im : re;
+  let mx = 0; for (let i = 0; i < dim * dim; i++) mx = Math.max(mx, Math.abs(data[i]));
+  mx = Math.max(mx, 0.001);
+  const dmWrap = document.getElementById('dm-wrap');
+  const wrapW = (dmWrap && dmWrap.clientWidth > 0) ? dmWrap.clientWidth : 280;
+  const maxW = wrapW - 16;
+  const cell = Math.max(8, Math.floor((maxW - 32) / dim));
+  const ox = 28, oy = 4;
+  const W = cell * dim + ox + 4, H = cell * dim + oy + 24;
+  const ctx = setupHiDPICanvas(cv, W, H);
+  const _dmTh = document.documentElement.getAttribute('data-theme') || 'classic';
+  const _dmBg    = ({classic:'#f8fafc', dark:'#172135', aurora:'#1C1248', amber:'#14161d'})[_dmTh] || '#f8fafc';
+  const _dmLabel = ({classic:'#64748B', dark:'#94A3B8', aurora:'#A78BFA', amber:'#b49b7b'})[_dmTh] || '#64748B';
+  ctx.fillStyle = _dmBg; ctx.fillRect(0, 0, W, H);
+  const km = keepQubits.length;
+  const basisLabels = Array.from({ length: dim }, (_, i) => '|' + i.toString(2).padStart(km, '0') + '\u27e9');
+  for (let i = 0; i < dim; i++) for (let j = 0; j < dim; j++) {
+    const v = data[i * dim + j], x = ox + j * cell, y = oy + i * cell;
+    const t = Math.abs(v) / mx;
+    let r, g, b;
+    if (v >= 0) { r = Math.round(235 - 185 * t); g = Math.round(242 - 155 * t); b = 255; }
+    else { r = 255; g = Math.round(242 - 155 * t); b = Math.round(235 - 185 * t); }
+    ctx.fillStyle = 'rgb('+r+','+g+','+b+')'; ctx.fillRect(x, y, cell - 1, cell - 1);
+    if (cell >= 18 && Math.abs(v) > 0.005) {
+      ctx.fillStyle = t > 0.55 ? '#fff' : '#334155';
+      ctx.font = Math.min(10, cell / 1.8) + "px 'JetBrains Mono',monospace"; ctx.textAlign = 'center';
+      ctx.fillText(v.toFixed(2), x + cell / 2, y + cell / 2 + 3);
+    }
+  }
+  for (let i = 0; i < dim; i++) {
+    ctx.fillStyle = _dmLabel; ctx.font = "10px 'JetBrains Mono',monospace"; ctx.textAlign = 'right';
+    ctx.fillText(basisLabels[i], ox - 2, oy + i * cell + cell / 2 + 3);
+  }
+  cv._dmMeta = { cell, ox, oy, dim, re, im, keepQubits, basisLabels };
+}
+
+function _initDMHover() {
+  ['dm-cv', 'dm-cv-im'].forEach(id => {
+    const cv = document.getElementById(id); if (!cv) return;
+    cv.onmousemove = e => {
+      const meta = cv._dmMeta; if (!meta) return;
+      const rect = cv.getBoundingClientRect();
+      const cssZoom = rect.width / (meta.cell * meta.dim + meta.ox + 4);
+      const mx = (e.clientX - rect.left) / cssZoom;
+      const my = (e.clientY - rect.top) / cssZoom;
+      const col = Math.floor((mx - meta.ox) / meta.cell);
+      const row = Math.floor((my - meta.oy) / meta.cell);
+      if (col < 0 || col >= meta.dim || row < 0 || row >= meta.dim) { _hideDMTooltip(); return; }
+      _showDMTooltip(e, meta, row, col);
+    };
+    cv.onmouseleave = _hideDMTooltip;
+  });
+}
+
+function _showDMTooltip(e, meta, row, col) {
+  const tip = document.getElementById('dm-tooltip'); if (!tip) return;
+  const re = meta.re[row * meta.dim + col];
+  const im = meta.im[row * meta.dim + col];
+  const mag = Math.sqrt(re*re + im*im);
+  const phase = (Math.atan2(im, re) * 180 / Math.PI).toFixed(1);
+  const rLabel = meta.basisLabels[row], cLabel = meta.basisLabels[col];
+  const isDiag = row === col;
+  const rho_ii = meta.re[row*meta.dim+row], rho_jj = meta.re[col*meta.dim+col];
+  const coherence = (rho_ii > 0 && rho_jj > 0) ? (mag / Math.sqrt(rho_ii * rho_jj)).toFixed(3) : '\u2014';
+  const _en = window._currentLang === 'en';
+  tip.innerHTML =
+    '<div class="dmt-title">\u03c1['+rLabel+', '+cLabel+']</div>' +
+    '<div class="dmt-row"><span>'+(_en?'Real Re':'实部 Re')+'</span><span>'+re.toFixed(4)+'</span></div>' +
+    '<div class="dmt-row"><span>'+(_en?'Imag Im':'虚部 Im')+'</span><span>'+im.toFixed(4)+'</span></div>' +
+    '<div class="dmt-row"><span>'+(_en?'Mag |\u03c1|':'模 |\u03c1|')+'</span><span>'+mag.toFixed(4)+'</span></div>' +
+    '<div class="dmt-row"><span>'+(_en?'Phase arg':'相位 arg')+'</span><span>'+phase+'\u00b0</span></div>' +
+    (!isDiag ? '<div class="dmt-row"><span>'+(_en?'Coherence':'相干强度')+'</span><span>'+coherence+'</span></div>' : '') +
+    '<div class="dmt-type">'+(isDiag ? (_en?'Diagonal: P('+rLabel+')':'对角元：测量概率 P('+rLabel+')') : (_en?'Off-diag: coherence':'非对角元：量子相干'))+'</div>';
+  tip.style.display = 'block';
+  const tw = tip.offsetWidth, th = tip.offsetHeight;
+  const x = (e.clientX - tw - 14 >= 0) ? e.clientX - tw - 14 : e.clientX + 14;
+  const y = (e.clientY + th + 10 <= window.innerHeight) ? e.clientY + 10 : e.clientY - th - 10;
+  tip.style.left = x + 'px';
+  tip.style.top  = y + 'px';
+}
+
+function _hideDMTooltip() {
+  const tip = document.getElementById('dm-tooltip');
+  if (tip) tip.style.display = 'none';
+}
+</script>
+</body>
+</html>
